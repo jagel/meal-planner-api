@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using MealPlanner.Api.Models.Recipes;
 
 namespace MealPlanner.Domain.Recipes.Interfaces
 {
     public interface IRecipeService
     {
+        public Task<Recipe> Create(RecipeCreate recipeCreate);
+        public Task<Recipe> Update(RecipeUpdate recipeUpdate);
+
+        public Task<Recipe> GetById(int recipeId);
+
+
+        public Task<bool> Delete(int recipeId);
     }
 }

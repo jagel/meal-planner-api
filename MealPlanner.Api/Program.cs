@@ -1,4 +1,11 @@
+using MealPlanner.Infrastructure.DataProvider.Context;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+//Configuration.GetValue<string>("db") TODO: create ConfigurationProvider
+builder.Services.AddDbContext<DbMealPlannerContext>(options => options.use());
+
 
 // Add services to the container.
 
