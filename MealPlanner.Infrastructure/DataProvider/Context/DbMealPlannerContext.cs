@@ -1,5 +1,5 @@
-﻿using MealPlanner.Domain.Entities.Globals.Interfaces;
-using MealPlanner.Domain.Entities.Recipes;
+﻿using MealPlanner.Domain.Entities.Recipes;
+using MealPlanner.Domain.Infra.Localizations;
 using MealPlanner.Domain.Infra.Profile;
 using MealPlanner.Infrastructure.DbSettings;
 using MealPlanner.Infrastructure.DbSettings.Extensions;

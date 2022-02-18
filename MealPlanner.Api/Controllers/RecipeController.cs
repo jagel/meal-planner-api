@@ -1,7 +1,7 @@
-﻿using MealPlanner.Api.Definitions;
-using MealPlanner.Api.Models.Recipes;
+﻿using MealPlanner.Api.Models.Recipes;
 using MealPlanner.Data.Builders;
 using MealPlanner.Data.Globals;
+using MealPlanner.Domain.Recipes.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MealPlanner.Api.Controllers
@@ -12,12 +12,16 @@ namespace MealPlanner.Api.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class RecipeController : BaseController
     {
         private readonly ILogger<RecipeController> _logger;
-        public RecipeController(ILogger<RecipeController> logger)
+        private readonly IRecipeService _recipeService;
+
+        public RecipeController(ILogger<RecipeController> logger, IRecipeService recipeService)
         {
             _logger = logger;
+            _recipeService = recipeService;
         }
 
         /// <summary>
@@ -28,50 +32,83 @@ namespace MealPlanner.Api.Controllers
         /// </remarks>
         /// <param name="recipeId">Recipe Id</param>
         /// <returns>Returns Recipe record by recipe Id</returns>
-        [HttpGet("getByRecipeId/{recipeId}", Name = "[controller].GetByRecipeId")]
+        [HttpGet("getByRecipeById/{recipeId}", Name = "[controller].GetByRecipeById")]
         [ProducesResponseType(typeof(ModelResponse<Recipe>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelResponse<Recipe>), StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(typeof(ModelResponse<Recipe>), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetByRecipeId([FromRoute] int recipeId)
+        public async Task<IActionResult> GetByRecipeById([FromRoute] int recipeId)
         {
-            var response = new ModelResponse<Recipe>()
+            if (recipeId <= 0)
+                ModelState.AddModelError("recipeId", "recipe id invalid");
+
+            if (ModelState.ErrorCount > 0)
+                return BadRequest(ModelState);
+
+            var recipe = await _recipeService.GetById(recipeId);
+
+            var recipeResponse = new ModelResponse<Recipe>()
             {
-                Data = new()
-                {
-                    RecipeId = 1,
-                    Name = "Sandwitch",
-                    Description = "Ingredients: xxxx, instructions: xxxx"
-                }
+                Data = recipe
             };
 
-            if (response.Data == null)
-            {
-
-                response = ErrorResponse.NotFoundErrorResponse(response, GetLanguage());
-                return new NotFoundObjectResult(response);
-            }
-
-            return new OkObjectResult(response);
+            return new OkObjectResult(recipeResponse);
         }
 
-        //[HttpPost(Name = "[controller].Post")]
+        /// <summary>
+        /// Create recipe.
+        /// </summary>
+        /// <remarks>
+        /// This endpoint will Create a recipe
+        /// </remarks>
+        /// <param name="recipeCreate">Recipe create model</param>
+        /// <returns>Returns Recipe created</returns>
+        [HttpPost("createRecipe", Name = "[controller].CreateRecipe")]
+        [ProducesResponseType(typeof(ModelResponse<Recipe>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ModelResponse<Recipe>), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> CreateRecipe([FromBody] RecipeCreate recipeCreate)
+        {
+            if (ModelState.ErrorCount > 0)
+                return BadRequest(ModelState);
 
-        //public IActionResult Post()
-        //{
-        //    return Ok();
-        //}
+            var recipe = await _recipeService.Create(recipeCreate);
 
+            var recipeResponse = new ModelResponse<Recipe>()
+            {
+                Data = recipe
+            };
 
-        //[HttpPut(Name = "[controller].Put")]
-        //public IActionResult Update([FromRoute]int recipeId, [FromBody] object request)
-        //{
-        //if (recipeId != request.recipeId)
-        //    ModelState.AddModelError(nameof(request.ConfigurationId), "ConfigurationId does not match");
+            return new OkObjectResult(recipeResponse);
+        }
 
-        //if (!ModelState.IsValid)
-        //    return BadRequest(ModelState);
+        /// <summary>
+        /// Update recipe.
+        /// </summary>
+        /// <remarks>
+        /// This endpoint will Create a recipe
+        /// </remarks>
+        /// <param name="recipeId">Recipe to be updated</param>
+        /// <param name="recipeUpdate">Recipe create model</param>
+        /// <returns>Returns Recipe updated</returns>
+        [HttpPut("updateRecipe/{recipeID}",Name = "[controller].UpdateRecipe")]
+        [ProducesResponseType(typeof(ModelResponse<Recipe>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ModelResponse<Recipe>), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UpdateRecipe([FromRoute]int recipeId ,[FromBody] RecipeUpdate recipeUpdate)
+        {
+            if (recipeId != recipeUpdate.RecipeId)
+                ModelState.AddModelError("RecipeId","Recipe id does not match with Recipe to update");
 
-        //    return Ok();
-        //}
+            if (ModelState.ErrorCount > 0)
+                return BadRequest(ModelState);
+
+            var recipe = await _recipeService.Update(recipeUpdate);
+
+            var recipeResponse = new ModelResponse<Recipe>()
+            {
+                Data = recipe
+            };
+
+            return new OkObjectResult(recipeResponse);
+        }
+
     }
 }

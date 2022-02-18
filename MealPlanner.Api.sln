@@ -3,15 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPlanner.Api", "MealPlanner.Api\MealPlanner.Api.csproj", "{E387DA60-2DD8-4BCF-93A8-A1DE5AD1BB14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MealPlanner.Api", "MealPlanner.Api\MealPlanner.Api.csproj", "{E387DA60-2DD8-4BCF-93A8-A1DE5AD1BB14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPlanner.Infrastructure", "MealPlanner.Infrastructure\MealPlanner.Infrastructure.csproj", "{E80ADD40-3A92-4994-99FC-17DD8A97CFBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MealPlanner.Infrastructure", "MealPlanner.Infrastructure\MealPlanner.Infrastructure.csproj", "{E80ADD40-3A92-4994-99FC-17DD8A97CFBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPlanner.Domain", "MealPlanner.Domain\MealPlanner.Domain.csproj", "{C5A426A8-B008-4E63-B4EA-E2FF1A34AB86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MealPlanner.Domain", "MealPlanner.Domain\MealPlanner.Domain.csproj", "{C5A426A8-B008-4E63-B4EA-E2FF1A34AB86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPlanner.Data", "MealPlanner.Data\MealPlanner.Data.csproj", "{E10F3190-9164-4911-881B-D7ED546B4B49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MealPlanner.Data", "MealPlanner.Data\MealPlanner.Data.csproj", "{E10F3190-9164-4911-881B-D7ED546B4B49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPlanner.Domain.Entities", "MealPlanner.Domain.Entities\MealPlanner.Domain.Entities.csproj", "{CA71EA1E-0321-4799-AA8F-4D0B7DF5A915}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MealPlanner.Domain.Entities", "MealPlanner.Domain.Entities\MealPlanner.Domain.Entities.csproj", "{CA71EA1E-0321-4799-AA8F-4D0B7DF5A915}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B50D9A22-52C3-489F-AC23-6E5C1229E2F6}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\16022022_CreateTables.sql = Scripts\16022022_CreateTables.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -8,9 +8,7 @@
         /// <summary>
         /// RecipeId
         /// </summary>
-        /// <example>
-        /// 1
-        /// </example>
+        /// <example>1</example>
         public int RecipeId { get; set; }
 
         /// <summary>

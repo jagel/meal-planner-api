@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MealPlanner.Api.Models.Recipes;
-using MealPlanner.Data;
-using Entities = MealPlanner.Domain.Entities.Recipes;
+using RecipeEntities = MealPlanner.Domain.Entities.Recipes;
 
 namespace MealPlanner.Domain.Mapper
 {
@@ -10,7 +9,7 @@ namespace MealPlanner.Domain.Mapper
         public MappingProfile()
         {
             // ------- Recipe
-            CreateMap<Recipe, Entities.Recipes.Recipe>()
+            CreateMap<Recipe, RecipeEntities.Recipe>()
                 .ForMember(dest => dest.Id, from => from.MapFrom(src => src.RecipeId))
                 .ReverseMap();
         }

@@ -1,7 +1,5 @@
-﻿using MealPlanner.Domain.Entities.Recipe;
-using MealPlanner.Domain.Infra.Definitions;
+﻿using MealPlanner.Domain.Entities.Recipes;
 using MealPlanner.Infrastructure.DbSettings.Definitions;
-using MealPlanner.Infrastructure.DbSettings.Extensions;
 using MealPlanner.Infrastructure.DbSettings.ModelBuilders;
 
 namespace MealPlanner.Infrastructure.DataProvider.ModelBuilder
@@ -14,8 +12,7 @@ namespace MealPlanner.Infrastructure.DataProvider.ModelBuilder
             {
                 entity.Property(x => x.SourceCode)
                     //.HasDefaultValue(E_SOURCE_CODE.Active)
-                    .HasConversion(ConvertersExtension.EnumConverter<PlannerSourceCode.E_SOURCE_CODE>())
-                    .IsRequired()
+                    .IsRequired(false)
                     .HasMaxLength(DatabaseProperties.MySQL.MAXLENGTH_ENUM);
 
             });

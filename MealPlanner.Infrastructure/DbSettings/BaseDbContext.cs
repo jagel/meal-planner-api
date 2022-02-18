@@ -1,4 +1,5 @@
 ﻿using MealPlanner.Domain.Entities.Globals.Interfaces;
+using MealPlanner.Domain.Infra.Localizations;
 using MealPlanner.Domain.Infra.Profile;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,13 +29,13 @@ namespace MealPlanner.Infrastructure.DbSettings
             foreach (var entityEntry in createEntries)
             {
                 ((IAuditEntity)entityEntry.Entity).CreatedDate = _localization.GetDateTime();
-                ((IAuditEntity)entityEntry.Entity).CreatedBy = _userProfile.GetUserId();
+                ((IAuditEntity)entityEntry.Entity).CreatedBy = _userProfile.GetUserEmail();
             }
 
             foreach (var entityEntry in updateEntries)
             {
                 ((IAuditEntity)entityEntry.Entity).UpdatedDate = _localization.GetDateTime();
-                ((IAuditEntity)entityEntry.Entity).UpdatedBy = _userProfile.GetUserId();
+                ((IAuditEntity)entityEntry.Entity).UpdatedBy = _userProfile.GetUserEmail();
             }
 
             return base.SaveChangesAsync(cancellationToken);
@@ -53,13 +54,13 @@ namespace MealPlanner.Infrastructure.DbSettings
             foreach (var entityEntry in createEntries)
             {
                 ((IAuditEntity)entityEntry.Entity).CreatedDate = _localization.GetDateTime();
-                ((IAuditEntity)entityEntry.Entity).CreatedBy = _userProfile.GetUserId();
+                ((IAuditEntity)entityEntry.Entity).CreatedBy = _userProfile.GetUserEmail();
             }
 
             foreach (var entityEntry in updateEntries)
             {
                 ((IAuditEntity)entityEntry.Entity).UpdatedDate = _localization.GetDateTime();
-                ((IAuditEntity)entityEntry.Entity).UpdatedBy = _userProfile.GetUserId();
+                ((IAuditEntity)entityEntry.Entity).UpdatedBy = _userProfile.GetUserEmail();
             }
 
             return base.SaveChanges();

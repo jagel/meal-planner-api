@@ -2,6 +2,6 @@
 {
     public interface IUserProfile
     {
-        public Guid GetUserId();
+        public string GetUserEmail();
     }
 }

@@ -10,7 +10,8 @@
             public const int MAXLENGTH_ENUM = 50;
 
 
-            public const string TYPE_DATETIME = "datetime2";
+            public const string TYPE_DATETIME = "DATETIME";
+            //public const string TYPE_DATETIME = "datetime2";
         }
     }
 }

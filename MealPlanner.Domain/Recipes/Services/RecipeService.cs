@@ -39,6 +39,8 @@ namespace MealPlanner.Domain.Recipes.Services
         public async Task<Recipe> GetById(int recipeId)
         {
             var recipe = await _recipeRepository.GetById(recipeId);
+            
+            _recipeValidation.IsEntityNull(recipe);
 
             var recipeResponse = _mapper.Map<Recipe>(recipe);
             return recipeResponse;

@@ -1,4 +1,6 @@
-﻿namespace MealPlanner.Api.Models.Recipes
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MealPlanner.Api.Models.Recipes
 {
     /// <summary>
     /// Recipe returns recipe model.
@@ -11,6 +13,7 @@
         /// <example>
         /// Meatballs
         /// </example>
+        [Required]
         public string Name { get; set; }
 
 
