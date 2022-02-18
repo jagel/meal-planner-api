@@ -49,7 +49,7 @@ namespace MealPlanner.Domain.Recipes.Services
         public async Task<Recipe> Update(RecipeUpdate recipeUpdate)
         {
             var updateRecipeEntity = _mapper.Map<RecipesEntities.Recipe>(recipeUpdate);
-            var recipeCreated = await _recipeRepository.Create(updateRecipeEntity);
+            var recipeCreated = await _recipeRepository.Update(updateRecipeEntity);
 
             var recipeResponse = _mapper.Map<Recipe>(recipeCreated);
             return recipeResponse;

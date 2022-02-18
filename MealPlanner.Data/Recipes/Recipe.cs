@@ -28,17 +28,15 @@ namespace MealPlanner.Api.Models.Recipes
         /// Recipe Name
         /// </summary>
         /// <example>
-        /// Description
+        /// Description updated
         /// </example>
         public string Description { get; set; }
-
-
 
         /// <summary>
         /// Created By
         /// </summary>
-        /// /// <example>
-        /// XXXXX-XXXXX-XXXXX-XXXX
+        /// <example>
+        /// mail@test.com
         /// </example>
         public string CreatedBy { get; set; }
 
@@ -55,7 +53,7 @@ namespace MealPlanner.Api.Models.Recipes
         /// Created By
         /// </summary>
         /// <example>
-        /// XXXXX-XXXXX-XXXXX-XXXX
+        /// mail@test.com
         /// </example>
         public string? UpdatedBy { get; set; }
 
@@ -63,7 +61,7 @@ namespace MealPlanner.Api.Models.Recipes
         /// Updated DateTime
         /// </summary>
         /// <example>
-        /// 01-01-2022
+        /// 2022-02-18T16:11:07
         /// </example>
         public DateTime? UpdatedDate { get; set; }
     }

@@ -32,11 +32,11 @@ namespace MealPlanner.Api.Controllers
         /// </remarks>
         /// <param name="recipeId">Recipe Id</param>
         /// <returns>Returns Recipe record by recipe Id</returns>
-        [HttpGet("getByRecipeById/{recipeId}", Name = "[controller].GetByRecipeById")]
+        [HttpGet("getRecipeById/{recipeId}", Name = "[controller].GetRecipeById")]
         [ProducesResponseType(typeof(ModelResponse<Recipe>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelResponse<Recipe>), StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(typeof(ModelResponse<Recipe>), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetByRecipeById([FromRoute] int recipeId)
+        public async Task<IActionResult> GetRecipeById([FromRoute] int recipeId)
         {
             if (recipeId <= 0)
                 ModelState.AddModelError("recipeId", "recipe id invalid");
@@ -89,7 +89,7 @@ namespace MealPlanner.Api.Controllers
         /// <param name="recipeId">Recipe to be updated</param>
         /// <param name="recipeUpdate">Recipe create model</param>
         /// <returns>Returns Recipe updated</returns>
-        [HttpPut("updateRecipe/{recipeID}",Name = "[controller].UpdateRecipe")]
+        [HttpPut("updateRecipe/{recipeId}", Name = "[controller].UpdateRecipe")]
         [ProducesResponseType(typeof(ModelResponse<Recipe>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelResponse<Recipe>), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> UpdateRecipe([FromRoute]int recipeId ,[FromBody] RecipeUpdate recipeUpdate)

@@ -43,7 +43,7 @@ namespace MealPlanner.Infrastructure.DataProvider.Repositories
 
         public async Task<Recipe> Update(Recipe recipeUpdate)
         {
-            _context.Set<Recipe>().Add(recipeUpdate);
+            _context.Set<Recipe>().Update(recipeUpdate);
 
             var updatedCount = await _context.SaveChangesAsync();
 

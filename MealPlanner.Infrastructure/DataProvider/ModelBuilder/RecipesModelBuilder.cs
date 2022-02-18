@@ -10,11 +10,7 @@ namespace MealPlanner.Infrastructure.DataProvider.ModelBuilder
         {
             modelBuilder.Entity<Recipe>(entity =>
             {
-                entity.Property(x => x.SourceCode)
-                    //.HasDefaultValue(E_SOURCE_CODE.Active)
-                    .IsRequired(false)
-                    .HasMaxLength(DatabaseProperties.MySQL.MAXLENGTH_ENUM);
-
+               
             });
         }
     }
