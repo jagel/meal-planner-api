@@ -6,13 +6,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
 	<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<UserSecretsId>66ed76fb-75c4-4ac4-aab3-18dad0892317</UserSecretsId>
   </PropertyGroup>
 	
   <ItemGroup>
+	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
 	  <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
 	  <PackageReference Include="NSwag.Annotations" Version="13.15.7" />
 	  <PackageReference Include="NSwag.AspNetCore" Version="13.15.7" />
 	  <PackageReference Include="NSwag.Core" Version="13.15.7" />
+	  <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.1" />
   </ItemGroup>
 	
   <ItemGroup>

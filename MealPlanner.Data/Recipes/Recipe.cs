@@ -1,9 +1,11 @@
-﻿namespace MealPlanner.Api.Models.Recipes
+﻿using MealPlanner.Data.Globals;
+
+namespace MealPlanner.Api.Models.Recipes
 {
     /// <summary>
     /// Recipe returns recipe model.
     /// </summary>
-    public class Recipe
+    public class Recipe : IAuditFieldsResponse
     {
         /// <summary>
         /// RecipeId
@@ -26,8 +28,41 @@
         /// Recipe Name
         /// </summary>
         /// <example>
-        /// Description
+        /// Description updated
         /// </example>
         public string Description { get; set; }
+
+        /// <summary>
+        /// Created By
+        /// </summary>
+        /// <example>
+        /// mail@test.com
+        /// </example>
+        public string CreatedBy { get; set; }
+
+        /// <summary>
+        /// Created By
+        /// </summary>
+        /// <example>
+        /// 01-01-2022
+        /// </example>
+        public DateTime CreatedDate { get; set; }
+
+
+        /// <summary>
+        /// Created By
+        /// </summary>
+        /// <example>
+        /// mail@test.com
+        /// </example>
+        public string? UpdatedBy { get; set; }
+
+        /// <summary>
+        /// Updated DateTime
+        /// </summary>
+        /// <example>
+        /// 2022-02-18T16:11:07
+        /// </example>
+        public DateTime? UpdatedDate { get; set; }
     }
 }
