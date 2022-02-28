@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MealPlanner.Domain.Entities.Auth
+﻿namespace MealPlanner.Domain.Entities.Auth
 {
+    public enum EUserStatus
+    {
+        Active,
+        Inactive,
+    }
+
     public class OrganizationUser
     {
         public int Id { get; set; }
-        public string Status { get; set; }
+        public EUserStatus UserStatus { get; set; }
 
         public int OrganizationId { get; set; }
         public Organization Organization { get; set; }

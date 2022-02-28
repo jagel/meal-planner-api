@@ -35,6 +35,13 @@ builder.Services.AddSwaggerDocument(document =>
     document.Version = "beta";//"0.0.1";
 });
 
+//services cors
+var originRoute = builder.Configuration["origin-route"];
+builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+{
+    builder.WithOrigins(originRoute).AllowAnyMethod().AllowAnyHeader();
+}));
+
 var app = builder.Build();
 
 
@@ -46,6 +53,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+//app cors
+app.UseCors("corsapp");
 
 app.UseAuthorization();
 

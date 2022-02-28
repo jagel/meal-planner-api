@@ -15,4 +15,8 @@
     <ProjectReference Include="..\MealPlanner.Domain.Entities\MealPlanner.Domain.Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Auth\Services\" />
+  </ItemGroup>
+
 </Project>
