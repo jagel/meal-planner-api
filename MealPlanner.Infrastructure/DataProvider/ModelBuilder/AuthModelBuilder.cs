@@ -63,7 +63,7 @@ namespace MealPlanner.Infrastructure.DataProvider.ModelBuilder
                     .IsRequired()
                     .HasMaxLength(DatabaseProperties.MySQL.MAXLENGTH_NAME);
 
-                user.Property(x => x.UserName)
+                user.Property(x => x.Username)
                      .IsRequired()
                      .HasMaxLength(DatabaseProperties.MySQL.MAXLENGTH_SHORTNAME);
 
@@ -71,24 +71,22 @@ namespace MealPlanner.Infrastructure.DataProvider.ModelBuilder
                     .IsRequired()
                     .HasMaxLength(DatabaseProperties.MySQL.MAXLENGTH_NAME);
 
-                user.Property(x => x.LastName)
+                user.Property(x => x.Lastname)
                     .IsRequired()
                     .HasMaxLength(DatabaseProperties.MySQL.MAXLENGTH_NAME);
 
-                user.Property(x => x.LastName)
+                user.Property(x => x.Lastname)
                     .IsRequired()
                     .HasMaxLength(DatabaseProperties.MySQL.MAXLENGTH_NAME);
 
 
                 user.Property(x => x.PasswordHash)
                     .IsRequired()
-                    .IsRowVersion()
-                    .HasMaxLength(DatabaseProperties.MySQL.MAXLENGTH_NAME);
+                    .IsConcurrencyToken();
 
                 user.Property(x => x.PasswordSalt)
                     .IsRequired()
-                    .IsRowVersion()
-                    .HasMaxLength(DatabaseProperties.MySQL.MAXLENGTH_NAME);
+                    .IsConcurrencyToken();
 
                 user.HasMany(o => o.OrganizationUsers)
                   .WithOne(ou => ou.User)

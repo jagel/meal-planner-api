@@ -1,7 +1,7 @@
 ﻿using MealPlanner.Api.Models.Recipes;
-using MealPlanner.Data.Builders;
 using MealPlanner.Data.Globals;
 using MealPlanner.Domain.Recipes.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MealPlanner.Api.Controllers
@@ -13,6 +13,7 @@ namespace MealPlanner.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Produces("application/json")]
+    [Authorize]
     public class RecipeController : BaseController
     {
         private readonly ILogger<RecipeController> _logger;

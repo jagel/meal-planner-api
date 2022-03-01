@@ -45,10 +45,10 @@ CREATE TABLE `Organization` (
 # ---------------------------------------------------------------------- #
 
 CREATE TABLE `OrganizationUser` (
-    `OrganizationUser`  INTEGER     NOT NULL AUTO_INCREMENT,
-    `UserStatus`        VARCHAR(50) NOT NULL,
-    `OrganizationId`    INTEGER,
-    `UserId`            INTEGER,
+    `OrganizationUserId`    INTEGER     NOT NULL AUTO_INCREMENT,
+    `UserStatus`            VARCHAR(50) NOT NULL,
+    `OrganizationId`        INTEGER,
+    `UserId`                INTEGER,
 
     CONSTRAINT `PK_OrganizationUser` PRIMARY KEY (`OrganizationUser`)
 );

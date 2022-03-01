@@ -16,6 +16,8 @@ builder.Services.AddDbContext<DbMealPlannerContext>(options => options.UseMySql(
 // Add services to the container.
 builder.Services.AddStandardServicesApp();
 
+builder.Services.AddAuthenticationSevices();
+
 // Recipe
 builder.Services.AddTransient<IRecipeRepository, RecipeRepository>();
 builder.Services.AddTransient<IRecipeService, RecipeService>();

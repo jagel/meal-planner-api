@@ -1,84 +1,62 @@
-﻿using MealPlanner.Data.User;
-using Microsoft.AspNetCore.Http;
+﻿using MealPlanner.Data.Auth;
+using MealPlanner.Domain.Auth.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using System.Security.Cryptography;
 
 namespace MealPlanner.Api.Controllers
 {
-    [Route("api/[controller]")]
+    /// <summary>
+    /// Authentication controller
+    /// Responisble for validate access to system and logout
+    /// </summary>
     [ApiController]
     public class AuthController : BaseController
     {
-        public static User user = new User();
-        public AuthController()
-        {
+        private readonly IUserSessionService _userSessionService;
+        private readonly ILogger<AuthController> _logger;
 
+        public AuthController(IUserSessionService userSessionService, 
+                              ILogger<AuthController> logger)
+        {
+            _userSessionService = userSessionService;
+            _logger = logger;
         }
 
-        [HttpPost("login", Name = "[controller].login")]
+        /// <summary>
+        /// Login user, creates user session
+        /// </summary>
+        /// <param name="userRequest">User request model</param>
+        /// <returns>Json Web Token</returns>
+        [HttpPost("login", Name = "[controller].Login")]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest userRequest)
         {
-            if (userRequest.Email != user.Email)
+            if (!ModelState.IsValid)
             {
-                return BadRequest("error");
+                return BadRequest(ModelState);
             }
-            if (!VerifyPasswordHash(userRequest.Password, user.PasswordHash, user.PasswordSalt))
-            {
 
+            if (!await _userSessionService.AreCredentialValidAsync(userRequest))
+            {
+                return BadRequest("Invalid Session");
             }
-            return Ok("Completed");
+
+            var jwt = await _userSessionService.LogInAsync(userRequest);
+
+            return Ok(jwt);
         }
 
-
-        [HttpPost("register", Name = "[controller].register")]
-        public async Task<IActionResult> Register([FromBody] UserLoginRequest UserRequest)
+        /// <summary>
+        /// Ends session for user, returns if was able to log out succesfully
+        /// </summary>
+        /// <param name="UserRequest">Model user</param>
+        /// <returns>True</returns>
+        [HttpPost("logout", Name = "[controller].Logout")]
+        public async Task<IActionResult> Logout([FromBody] UserLoginRequest UserRequest)
         {
-            CreatePasswordHash(UserRequest.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            var loggedOut = await _userSessionService.LogOutAsync();
 
-            user.Email = UserRequest.Email;
-            user.Password = UserRequest.Password;
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-
-            return Ok(user);
+            return Ok(loggedOut);
         }
 
-        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
-        {
-            using (var hmac = new HMACSHA512())
-            {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-            }
-        }
-
-        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
-        {
-            using (var hmac = new HMACSHA512(passwordSalt))
-            {
-                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                return computedHash.SequenceEqual(passwordHash);
-            }
-        }
-
-        private string CreateToken(User userModel)
-        {
-            List<Claim> claims = new()
-            {
-                new Claim(ClaimTypes.Email, userModel.Email)
-            };
-            //var key =  new SymmetricSecurityKey()
-            //var credentian = new SigningCredentials()
-            var token = new JwtSecurityToken();
-        }
-    }
-
-    public class User
-    {
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
+      
     }
 }

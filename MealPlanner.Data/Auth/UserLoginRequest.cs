@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MealPlanner.Data.User
+namespace MealPlanner.Data.Auth
 {
     /// <summary>
     /// Recipe returns recipe model.
@@ -14,6 +14,7 @@ namespace MealPlanner.Data.User
         /// mail@examplle.com
         /// </example>
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
         /// <summary>
