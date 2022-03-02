@@ -13,7 +13,6 @@ namespace MealPlanner.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Produces("application/json")]
-    [Authorize]
     public class RecipeController : BaseController
     {
         private readonly ILogger<RecipeController> _logger;
