@@ -1,7 +1,7 @@
 ﻿using MealPlanner.Api.Models.Recipes;
-using MealPlanner.Data.Builders;
 using MealPlanner.Data.Globals;
 using MealPlanner.Domain.Recipes.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MealPlanner.Api.Controllers

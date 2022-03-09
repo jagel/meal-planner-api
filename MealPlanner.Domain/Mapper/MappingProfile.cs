@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MealPlanner.Api.Models.Recipes;
+using MealPlanner.Data.Auth;
+using MealPlanner.Domain.Entities.Auth;
 using RecipeEntities = MealPlanner.Domain.Entities.Recipes;
 
 namespace MealPlanner.Domain.Mapper
@@ -8,7 +10,18 @@ namespace MealPlanner.Domain.Mapper
     {
         public MappingProfile()
         {
+            AuthMappingProfile();
             RecipeMappingProfile();
+        }
+
+        private void AuthMappingProfile()
+        {
+            CreateMap<CreateUserRequest, User>()
+                .ReverseMap();
+
+            CreateMap<UserResponse, User>()
+                .ForMember(dest => dest.Id, from => from.MapFrom(src => src.UserId))
+                .ReverseMap();
         }
 
         private void RecipeMappingProfile()

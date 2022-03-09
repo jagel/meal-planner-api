@@ -1,5 +1,4 @@
 ﻿using MealPlanner.Domain.Entities.Recipes;
-using MealPlanner.Infrastructure.DbSettings.Definitions;
 using MealPlanner.Infrastructure.DbSettings.ModelBuilders;
 
 namespace MealPlanner.Infrastructure.DataProvider.ModelBuilder

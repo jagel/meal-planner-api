@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MealPlanner.Data.Auth;
+using MealPlanner.Data.Globals;
+using MealPlanner.Domain.Auth.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MealPlanner.Api.Controllers
 {
@@ -11,24 +14,13 @@ namespace MealPlanner.Api.Controllers
     public class AccountController : ControllerBase
     {
         private readonly ILogger<AccountController> _logger;
+        private readonly IUserService _userService;
 
-        public AccountController(ILogger<AccountController> logger)
+        public AccountController(ILogger<AccountController> logger, IUserService userService)
         {
             _logger = logger;
+            _userService = userService;
         }
-
-        [HttpPost("login")]
-        public IActionResult Login()
-        {
-            return Ok();
-        }
-
-        [HttpPut("logout")]
-        public IActionResult Logout()
-        {
-            return Ok();
-        }
-
 
         [HttpPut("GetUser")]
         public IActionResult GetUser()
@@ -36,10 +28,18 @@ namespace MealPlanner.Api.Controllers
             return Ok();
         }
 
-        [HttpPost("createAccount")]
-        public IActionResult CreateAccount()
+        [HttpPost("createAccount", Name = "[controller].CreateAccount")]
+        [ProducesResponseType(typeof(ModelResponse<UserResponse>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> CreateAccount(CreateUserRequest createUserRequest)
         {
-            return Ok();
+            var userSaved = await _userService.CreateUserAsync(createUserRequest);
+
+            var respone = new ModelResponse<UserResponse>
+            {
+                Data = userSaved
+            };
+
+            return Ok(userSaved);
         }
 
 

@@ -15,10 +15,15 @@ namespace MealPlanner.Infrastructure.DbSettings.ModelBuilders
             string TableName = typeof(TEntity).Name;
             string text = "PrimaryKey_" + TableName + "Id";
             string TableNameId = TableName + "Id";
+
             modelBuilder.Entity(delegate (EntityTypeBuilder<TEntity> entity)
             {
-                entity.Property((TEntity x) => x.Id).HasColumnName(TableNameId).HasComment(TableName + " PK: " + TableNameId);
-                entity.HasKey((TEntity x) => x.Id).HasName(TableNameId);
+                entity.Property((TEntity x) => x.Id)
+                    .HasColumnName(TableNameId)
+                    .HasComment(TableName + " PK: " + TableNameId);
+
+                entity.HasKey((TEntity x) => x.Id)
+                    .HasName(TableNameId);
                 
                 entity.Property((TEntity x) => x.Name)
                     .IsRequired()
