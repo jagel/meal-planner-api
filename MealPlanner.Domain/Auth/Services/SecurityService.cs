@@ -1,8 +1,6 @@
 ﻿using MealPlanner.Domain.Auth.Interfaces;
-using MealPlanner.Domain.Entities.Auth;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -18,19 +16,6 @@ namespace MealPlanner.Domain.Auth.Services
         }
 
 
-
-        public IEnumerable<Claim> GetUserClaims(User user)
-        {
-            List<Claim> claims = new()
-            {
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim("Name", user.Name),
-                new Claim("Username", user.Username),
-                new Claim("Roles", "Test:Role"),
-            };
-
-            return claims;
-        }
 
         public (byte[] passwordHash, byte[] passwordSalt) CreatePasswordHash(string password)
         {

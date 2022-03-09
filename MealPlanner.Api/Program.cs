@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 //Configuration.GetValue<string>("db") TODO: create ConfigurationProvider
-var dbConnectionStr = builder.Configuration["connectionString:dbConnection"];
+var dbConnectionStr = builder.Configuration[ConfigVar.DatabaseConnecion];
 builder.Services.AddDbContext<DbMealPlannerContext>(options => options.UseMySql(dbConnectionStr, ServerVersion.AutoDetect(dbConnectionStr)));
 
 builder.Services.AddAuthentication(options =>
@@ -21,12 +21,12 @@ builder.Services.AddAuthentication(options =>
         //options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
     })
     .AddCookie()
-    .AddCookie("ExternalGoogle")
+    .AddCookie(ConfigVar.Google.AuthenticatioinScheme)
     .AddGoogle(options =>
     {
-        options.SignInScheme = "ExternalGoogle";
-        options.ClientId = builder.Configuration["google.clientId"];
-        options.ClientSecret = builder.Configuration["google.clientSecret"];
+        options.SignInScheme = ConfigVar.Google.AuthenticatioinScheme;
+        options.ClientId = builder.Configuration[ConfigVar.Google.ClientId];
+        options.ClientSecret = builder.Configuration[ConfigVar.Google.ClientSecret];
     });
 
 // Add services to the container.
@@ -40,24 +40,25 @@ builder.Services.AddTransient<IRecipeService, RecipeService>();
 builder.Services.AddTransient<IRecipeValidation, RecipeValidation>();
 
 
-builder.Services.AddControllers( o => 
-    o.Filters.Add(new AuthorizeFilter())
-);
+builder.Services.AddControllers( o =>
+{
+    // o.Filters.Add(new AuthorizeFilter())
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerDocument(document =>
 {
-    document.Title = "Api.Meals.Planner";
-    document.DocumentName = "v0.1";
-    document.Description = "API Meals planner";
-    document.Version = "beta";//"0.0.1";
+    document.Title = Swagger.V0.Title;
+    document.DocumentName = Swagger.V0.DocumentName;
+    document.Description = Swagger.V0.Description;
+    document.Version = Swagger.V0.Version;
 });
 
 //services cors
-var originRoute = builder.Configuration["origin-route"];
-builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+var originRoute = builder.Configuration[ConfigVar.Cors.Origin];
+builder.Services.AddCors(p => p.AddPolicy(ConfigVar.Cors.PolicyName, builder =>
 {
     builder.WithOrigins(originRoute).AllowAnyMethod().AllowAnyHeader();
 }));
@@ -75,7 +76,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 //app cors
-app.UseCors("corsapp");
+app.UseCors(ConfigVar.Cors.PolicyName);
 
 app.UseAuthentication();
 app.UseAuthorization();

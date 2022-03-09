@@ -10,8 +10,6 @@ namespace MealPlanner.Domain.Auth.Interfaces
 
         (byte[] passwordHash, byte[] passwordSalt) CreatePasswordHash(string password);
 
-        IEnumerable<Claim> GetUserClaims(User user);
-
         SigningCredentials GetSignInCredentials();
     }
 }

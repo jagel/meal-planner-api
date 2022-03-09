@@ -1,9 +1,11 @@
 ﻿using MealPlanner.Data.Auth;
+using MealPlanner.Data.Auth.Claims;
 using MealPlanner.Domain.Auth.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -19,12 +21,18 @@ namespace MealPlanner.Api.Controllers
     {
         private readonly IUserSessionService _userSessionService;
         private readonly ILogger<AuthController> _logger;
+        private readonly IConfiguration _configuration;
+        private readonly IExternalAuthorization _externalAuthorization;
 
-        public AuthController(IUserSessionService userSessionService, 
-                              ILogger<AuthController> logger)
+        public AuthController(IUserSessionService userSessionService,
+                              ILogger<AuthController> logger,
+                              IConfiguration configuration,
+                              IExternalAuthorization externalAuthorization)
         {
             _userSessionService = userSessionService;
             _logger = logger;
+            _configuration = configuration;
+            _externalAuthorization = externalAuthorization;
         }
 
         /// <summary>
@@ -46,14 +54,16 @@ namespace MealPlanner.Api.Controllers
                 return Unauthorized();
             }
 
-            //var jwt = await _userSessionService.LogInAsync(userRequest);
-            var claims = new List<Claim>
+            //var claims = await _userClaimPrincipalFactory.CreateAsync(new ApplicationUser { });
+            await _userSessionService.LogInAsync(new() { });
+
+            var claimsList = new List<Claim>
             {
                 new Claim(ClaimTypes.Email , userRequest.Email),
                 new Claim(ClaimTypes.NameIdentifier , "1")
             };
 
-            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var identity = new ClaimsIdentity(claimsList, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
             var properties = new AuthenticationProperties { IsPersistent = true };
             await HttpContext.SignInAsync(
@@ -66,24 +76,18 @@ namespace MealPlanner.Api.Controllers
 
         [HttpGet("signin-google", Name = "[controller].LoginWithGoogle")]
         [AllowAnonymous]
-        public async Task<IActionResult> LoginWithGoogle(string returnUrl ="/")
+        public async Task<IActionResult> LoginWithGoogle(string returnUrl)
         {
-            var props = new AuthenticationProperties()
-            {
-                RedirectUri = Url.Action("GoogleLoginCallback"),
-                Items =
-                {
-                    { "returnUrl", returnUrl }
-                }
-            };
-            return Challenge(props, GoogleDefaults.AuthenticationScheme);
+            var apiCallback = Url.Action("GoogleLoginCallback");
+            var propAuth = _externalAuthorization.GenerateAuthenticationProperties(returnUrl, apiCallback);
+            return Challenge(propAuth, GoogleDefaults.AuthenticationScheme);
         }
 
         [HttpGet("googleLoginCallback", Name = "[controller].GoogleLoginCallback")]
         [AllowAnonymous]
         public async Task<IActionResult> GoogleLoginCallback()
         {
-            var result = await HttpContext.AuthenticateAsync("ExternalGoogle");
+            var result = await HttpContext.AuthenticateAsync(ConfigVar.Google.AuthenticatioinScheme);
             var externalClaims = result.Principal.Claims.ToList();
             var subjectId = externalClaims.Where(x => x.Type == ClaimTypes.NameIdentifier).Select(x => x.Value).FirstOrDefault();
 
@@ -99,8 +103,8 @@ namespace MealPlanner.Api.Controllers
 
 
             //deleted temporary cookie used during google authentication
-            await HttpContext.SignOutAsync("ExternalGoogle");
-            await HttpContext.SignInAsync("ExternalGoogle", principal);
+            await HttpContext.SignOutAsync(ConfigVar.Google.AuthenticatioinScheme);
+            await HttpContext.SignInAsync(ConfigVar.Google.AuthenticatioinScheme, principal);
 
             return LocalRedirect("/");
         }
