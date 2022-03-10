@@ -74,6 +74,11 @@ namespace MealPlanner.Api.Controllers
             return SignIn(principal,properties,CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
+        /// <summary>
+        /// Login user google authentication, don't use swagger, requesst by route
+        /// </summary>
+        /// <param name="returnUrl">Front end Url</param>
+        /// <returns>Authentication modal</returns>
         [HttpGet("signin-google", Name = "[controller].LoginWithGoogle")]
         [AllowAnonymous]
         public async Task<IActionResult> LoginWithGoogle(string returnUrl)
@@ -87,26 +92,24 @@ namespace MealPlanner.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GoogleLoginCallback()
         {
-            var result = await HttpContext.AuthenticateAsync(ConfigVar.Google.AuthenticatioinScheme);
+            var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            var properties = result.Properties.Items;
             var externalClaims = result.Principal.Claims.ToList();
             var subjectId = externalClaims.Where(x => x.Type == ClaimTypes.NameIdentifier).Select(x => x.Value).FirstOrDefault();
 
-            //set claims 
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Email , "examople.com"),
-                new Claim(ClaimTypes.NameIdentifier , subjectId)
-            };
-
-            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var identity = new ClaimsIdentity(externalClaims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
 
 
             //deleted temporary cookie used during google authentication
-            await HttpContext.SignOutAsync(ConfigVar.Google.AuthenticatioinScheme);
-            await HttpContext.SignInAsync(ConfigVar.Google.AuthenticatioinScheme, principal);
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-            return LocalRedirect("/");
+            var url = "";
+            if (properties.ContainsKey(Domain.Definitions.ReturnUrl))
+                url = properties[Domain.Definitions.ReturnUrl];
+
+            return Redirect(url);
         }
 
 
@@ -117,11 +120,18 @@ namespace MealPlanner.Api.Controllers
         [HttpGet("logout", Name = "[controller].Logout")]
         public async Task<IActionResult> Logout()
         {
-       //     var loggedOut = await _userSessionService.LogOutAsync();
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return Redirect("/");
         }
 
-      
+
+        [AllowAnonymous]
+        [HttpGet("denied", Name = "[controller].Denied")]
+        public async Task<IActionResult> Denied()
+        {
+            var data = new { demo = "demo" };
+            return Unauthorized(data);
+        }
+
     }
 }

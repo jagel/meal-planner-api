@@ -10,5 +10,7 @@ namespace MealPlanner.Domain.Auth.Interfaces
     public interface IExternalAuthorization
     {
         AuthenticationProperties GenerateAuthenticationProperties(string returnUrl, string urlAPICallback);
+
+
     }
 }
