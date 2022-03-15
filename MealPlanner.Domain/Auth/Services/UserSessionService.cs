@@ -1,7 +1,6 @@
 ﻿using MealPlanner.Data.Auth;
 using MealPlanner.Data.Auth.Claims;
 using MealPlanner.Domain.Auth.Interfaces;
-using Microsoft.AspNetCore.Identity;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 

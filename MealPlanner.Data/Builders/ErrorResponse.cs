@@ -6,19 +6,19 @@ namespace MealPlanner.Data.Builders
     public class ErrorResponse
     {
 
-        public static ModelResponse<TModelResponse> NotFoundErrorResponse<TModelResponse>(ModelResponse<TModelResponse> modelResponse, string language)
-        {
-            var notFOundMessage = MessageResponse.GETNOTFOUNDMESSAGE(language);
-            modelResponse.ErrorResponse = new()
-            {
-                Description = notFOundMessage,
-                Messages = new Dictionary<string, string>
-                    {
-                        { MessageResponse.NOTFOUND, MessageResponse.NOTFOUNDBYENTITY<TModelResponse>() }
-                    }
-            };
-            return modelResponse;
-        }
+        //public static ModelResponse<TModelResponse> NotFoundErrorResponse<TModelResponse>(ModelResponse<TModelResponse> modelResponse, string language)
+        //{
+        //    var notFOundMessage = MessageResponse.GETNOTFOUNDMESSAGE(language);
+        //    modelResponse.ErrorResponse = new()
+        //    {
+        //        Description = notFOundMessage,
+        //        Messages = new Dictionary<string, string>
+        //            {
+        //                { MessageResponse.NOTFOUND, MessageResponse.NOTFOUNDBYENTITY<TModelResponse>() }
+        //            }
+        //    };
+        //    return modelResponse;
+        //}
 
         //public static BoolResponse DeleteErrorResponse<TModelResponse>()
         //{
