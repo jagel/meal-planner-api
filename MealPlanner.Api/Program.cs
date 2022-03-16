@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMySQLDatabase(builder.Configuration);
 
 //Authentication configuration
-//builder.Services.AddAuthenticationConfiguration(builder.Configuration);
+builder.Services.AddAuthenticationConfiguration(builder.Configuration);
 
 //Global configuration
 builder.Services.AddStandardServicesApp();
@@ -17,24 +17,16 @@ builder.Services.AddStandardServicesApp();
 builder.Services.AddAuthenticationDI();
 builder.Services.AddRecipeServices();
 
+//CORS
+builder.Services.AddCors();
 
-builder.Services.AddControllers();
-//builder.Services.AddControllers( o => { o.Filters.Add(new AuthorizeFilter()); });
+//builder.Services.AddControllers();
+builder.Services.AddControllers( o => { o.Filters.Add(new AuthorizeFilter()); });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerDocument(DocumentationConfiguration.DocumentationV0);
 
-
-//services cors
-builder.Services.AddCors(p => p.AddPolicy(ConfigVar.Cors.PolicyName, 
-    builderCors =>
-    {
-        var origin = builder.Configuration.GetValue<string>(ConfigVar.Cors.Origin);
-        builderCors.WithOrigins(origin);
-        //builderCors.AllowAnyMethod();
-        //builderCors.AllowCredentials();
-    }));
 
 var app = builder.Build();
 
@@ -46,12 +38,20 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUi3();
 }
 
+// global cors policy
+app.UseCors(x => x
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(origin => true) // allow any origin
+    .AllowCredentials()); // allow credentials
+
+
+
 app.UseHttpsRedirection();
 
-//app cors
-app.UseCors(ConfigVar.Cors.PolicyName);
 
-//app.UseAuthentication();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

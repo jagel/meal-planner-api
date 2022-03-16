@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MealPlanner.Data.Globals.Respones
+namespace MealPlanner.Data.Globals.Responses
 {
     public static class ErrorResponses
     {
@@ -15,6 +15,11 @@ namespace MealPlanner.Data.Globals.Respones
             {
                 { "Internal Error", "Request error response" }
             }
+        };
+
+        public static ModelErrorResponse UnauthorizedErrorResponse = new ModelErrorResponse
+        {
+            Description = "Unauthorize",
         };
     }
 }

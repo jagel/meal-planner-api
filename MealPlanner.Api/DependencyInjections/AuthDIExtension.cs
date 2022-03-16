@@ -13,7 +13,11 @@ namespace MealPlanner.Api.DependencyInjections
     {
         public static void AddAuthenticationConfiguration(this IServiceCollection service, IConfiguration configuration)
         {
-            service.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
+            service.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.AccessDeniedPath = "/api/auth/denied";
+            });
           
         }
 
@@ -21,6 +25,9 @@ namespace MealPlanner.Api.DependencyInjections
         {
 
             //service.AddTransient<IUserClaimsPrincipalFactory<ApplicationUser>, AuthUserClaimsPrincipalFactory>();
+            service.AddScoped<IJwtService, JwtService>();
+
+
             service.AddScoped<ISecurityService, SecurityService>();
             service.AddScoped<IUserSessionService, UserSessionService>();
 

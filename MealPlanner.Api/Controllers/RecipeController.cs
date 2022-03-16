@@ -1,6 +1,6 @@
 ﻿using MealPlanner.Api.Models.Recipes;
 using MealPlanner.Data.Globals;
-using MealPlanner.Data.Globals.Respones;
+using MealPlanner.Data.Globals.Responses;
 using MealPlanner.Domain.Recipes.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

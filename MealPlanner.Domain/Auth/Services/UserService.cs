@@ -44,6 +44,12 @@ namespace MealPlanner.Domain.Auth.Services
             return userResponse;
         }
 
+        public async Task<int> GetUserIdByEmailAsync(string email)
+        {
+            var user = await _userRepository.GetUserByEmailAsync(email);
+            return user.Id;
+        }
+
         public async Task<UserResponse> UpdateUserAsync(CreateUserRequest updateUser)
         {
             var updateUserDb = _mapper.Map<User>(updateUser);

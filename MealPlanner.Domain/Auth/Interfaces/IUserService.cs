@@ -9,6 +9,7 @@ namespace MealPlanner.Domain.Auth.Interfaces
         Task<UserResponse> UpdateUserAsync(CreateUserRequest updateUser);
 
         Task<UserResponse> GetUserByIdAsync(int userId);
+        Task<int> GetUserIdByEmailAsync(string email);
 
     }
 }
