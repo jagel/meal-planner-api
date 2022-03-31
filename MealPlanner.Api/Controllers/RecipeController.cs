@@ -1,8 +1,6 @@
-﻿using JGL.Recipe.Contracts.Models.Recipes;
-using MealPlanner.Data.Globals;
-using MealPlanner.Data.Globals.Responses;
+﻿using JGL.Globals.Api.Controllers;
+using JGL.Recipes.Contracts.Models.Recipes;
 using MealPlanner.Domain.Recipes.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MealPlanner.Api.Controllers

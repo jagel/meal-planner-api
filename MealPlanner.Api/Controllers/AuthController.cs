@@ -1,4 +1,5 @@
-﻿using MealPlanner.Data.Auth;
+﻿using JGL.Globals.Api.Controllers;
+using MealPlanner.Data.Auth;
 using MealPlanner.Domain.Auth.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;

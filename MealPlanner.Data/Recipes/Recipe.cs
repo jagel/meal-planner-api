@@ -2,7 +2,7 @@
 using JGL.Globals.Contracts.Models.Interfaces;
 using JGL.Globals.Contracts.Validations;
 
-namespace JGL.Recipe.Contracts.Models.Recipes
+namespace JGL.Recipes.Contracts.Models.Recipes
 {
     /// <summary>
     /// Recipe returns recipe model.

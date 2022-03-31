@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using JGL.Recipe.Contracts.Models.Recipes;
+using JGL.Recipes.Contracts.Models.Recipes;
 using MealPlanner.Data.Auth;
 using MealPlanner.Domain.Entities.Auth;
 using RecipeEntities = MealPlanner.Domain.Entities.Recipes;
