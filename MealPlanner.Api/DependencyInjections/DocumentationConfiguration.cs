@@ -9,7 +9,6 @@ namespace MealPlanner.Api.DependencyInjections
     {
         public static void DocumentationV0(AspNetCoreOpenApiDocumentGeneratorSettings document)
         {
-            document = new AspNetCoreOpenApiDocumentGeneratorSettings();
             document.Title = "Meal managger API";
             document.DocumentName = "v0.1";
             document.Description = "API Meals planner";

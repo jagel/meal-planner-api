@@ -27,7 +27,7 @@ builder.Services.AddControllers( o => { o.Filters.Add(new AuthorizeFilter()); })
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerDocument(DocumentationConfiguration.DocumentationV0);
+builder.Services.AddSwaggerDocument(d => DocumentationConfiguration.DocumentationV0(d));
 
 
 var app = builder.Build();
