@@ -27,7 +27,7 @@ namespace JGL.Recipes.Domain.Services
             var createRecipeEntity = _mapper.Map<RecipesEntities.Recipe>(recipeCreate);
 
             createRecipeEntity.Steps = recipeCreate.Steps.StepsToString();
-            var recipeCreated = await _recipeRepository.Create(createRecipeEntity);
+            var recipeCreated = await _recipeRepository.CreateAsync(createRecipeEntity);
 
             var recipeResponse = _mapper.Map<Recipe>(recipeCreated);
             return recipeResponse;
@@ -35,17 +35,17 @@ namespace JGL.Recipes.Domain.Services
 
         public async Task<bool> Delete(int recipeId)
         {
-            var recipe = await _recipeRepository.GetById(recipeId);
+            var recipe = await _recipeRepository.GetByIdAsync(recipeId);
 
             _recipeValidation.RecipeNotNullValidation(recipe);
 
-            var recipeDeleted = await _recipeRepository.Delete(recipe);
+            var recipeDeleted = await _recipeRepository.DeleteAsync(recipe);
             return recipeDeleted;
         }
 
         public async Task<Recipe> GetById(int recipeId)
         {
-            var recipe = await _recipeRepository.GetById(recipeId);
+            var recipe = await _recipeRepository.GetByIdAsync(recipeId);
             
             _recipeValidation.RecipeNotNullValidation(recipe);
 
@@ -58,7 +58,7 @@ namespace JGL.Recipes.Domain.Services
             var updateRecipeEntity = _mapper.Map<RecipesEntities.Recipe>(recipeUpdate);
             updateRecipeEntity.Steps = recipeUpdate.Steps.StepsToString();
 
-            var recipeCreated = await _recipeRepository.Update(updateRecipeEntity);
+            var recipeCreated = await _recipeRepository.UpdateAsync(updateRecipeEntity);
 
             var recipeResponse = _mapper.Map<Recipe>(recipeCreated);
             return recipeResponse;

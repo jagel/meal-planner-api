@@ -5,13 +5,13 @@ namespace JGL.Recipes.Domain.Interfaces
 {
     public interface IRecipeRepository
     {
-        public Task<Recipe> Create(Recipe recipeCreate);
+        public Task<Recipe> CreateAsync(Recipe recipeCreate);
 
-        public Task<Recipe> Update(Recipe recipeUpdate);
+        public Task<Recipe> UpdateAsync(Recipe recipeUpdate);
 
-        public Task<Recipe> GetById(int RecipeId);
+        public Task<Recipe> GetByIdAsync(int RecipeId);
 
 
-        public Task<bool> Delete(Recipe recipeDelete);
+        public Task<bool> DeleteAsync(Recipe recipeDelete);
     }
 }
