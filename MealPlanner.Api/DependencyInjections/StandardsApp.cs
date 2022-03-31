@@ -1,7 +1,6 @@
-﻿using MealPlanner.Domain.Infra.Localizations;
+﻿using JGL.Recipes.Domain.Mapper;
+using MealPlanner.Domain.Infra.Localizations;
 using MealPlanner.Domain.Infra.Profile;
-using MealPlanner.Domain.Mapper;
-using NSwag.Generation.AspNetCore;
 
 namespace MealPlanner.Api.DependencyInjections
 {
@@ -11,7 +10,9 @@ namespace MealPlanner.Api.DependencyInjections
         public static void AddStandardServicesApp(this IServiceCollection services)
         {
             services.AddHttpContextAccessor();
-            services.AddAutoMapper(typeof(MappingProfile));
+            services.AddAutoMapper(typeof(RecipeMappingProfile));
+            services.AddAutoMapper(typeof(MealPlanner.Domain.Mapper.AuthenticationMappingProfile));
+            
             services.AddScoped<IUserProfile, UserProfile>();
             services.AddScoped<ILocalization, Localization>();
         }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace MealPlanner.Api.Controllers
+namespace JGL.Globals.Api.Controllers
 {
     public class BaseController : ControllerBase
     {

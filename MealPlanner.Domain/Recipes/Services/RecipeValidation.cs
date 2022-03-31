@@ -1,9 +1,9 @@
-﻿using MealPlanner.Data.Definitions;
-using MealPlanner.Domain.Entities.Recipes;
+﻿using JGL.Recipes.Domain.Entities;
+using JGL.Recipes.Domain.Interfaces;
+using MealPlanner.Data.Definitions;
 using MealPlanner.Domain.Infra.Exceptions;
-using MealPlanner.Domain.Recipes.Interfaces;
 
-namespace MealPlanner.Domain.Recipes.Services
+namespace JGL.Recipes.Domain.Validations
 {
     public class RecipeValidation : IRecipeValidation
     {

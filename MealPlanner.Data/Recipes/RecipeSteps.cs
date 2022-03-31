@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 namespace JGL.Recipes.Contracts.Models.Recipes
 {
     /// <summary>
-    /// Recipe returns recipe model.
+    /// RecipeSteps
     /// </summary>
-    public class RecipeCreate
+    public class RecipeSteps
     {
         /// <summary>
         /// Recipe Name
@@ -15,31 +15,16 @@ namespace JGL.Recipes.Contracts.Models.Recipes
         /// Meatballs
         /// </example>
         [Required(ErrorMessage = MessagesValidation.ErrorRequiredMessage)]
-        [MaxLength(DefinitionsValues.MAXLENGTH_NAME, ErrorMessage = MessagesValidation.ErrorMaxLengthMessage)]
-        public string Name { get; set; }
-
+        public int Order { get; set; }
 
         /// <summary>
-        /// Recipe Name
+        /// In a large pot of salted, boiling water over medium-high heat, cook potatoes until just knife-tender, 7 to 8 minutes. Drain and let cool slightly.
         /// </summary>
         /// <example>
-        /// Description
+        /// Meatballs
         /// </example>
+        [Required(ErrorMessage = MessagesValidation.ErrorRequiredMessage)]
         [MaxLength(DefinitionsValues.MAXLENGTH_DESCRIPTION, ErrorMessage = MessagesValidation.ErrorMaxLengthMessage)]
         public string Description { get; set; }
-
-        /// <summary>
-        /// Recipe Steps collection
-        /// </summary>
-        /// <example>
-        /// [{
-        ///     order : 1,
-        ///     description : 'Add water'
-        /// },{
-        ///     order : 2,
-        ///     description: 'Serve'
-        /// }]
-        /// </example>
-        public IEnumerable<RecipeSteps> Steps { get; set; }
     }
 }

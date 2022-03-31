@@ -1,16 +1,17 @@
-﻿using RecipesEntities = MealPlanner.Domain.Entities.Recipes;
+﻿
+using JGL.Recipes.Domain.Entities;
 
-namespace MealPlanner.Domain.Recipes.Interfaces
+namespace JGL.Recipes.Domain.Interfaces
 {
     public interface IRecipeRepository
     {
-        public Task<RecipesEntities.Recipe> Create(RecipesEntities.Recipe recipeCreate);
+        public Task<Recipe> CreateAsync(Recipe recipeCreate);
 
-        public Task<RecipesEntities.Recipe> Update(RecipesEntities.Recipe recipeUpdate);
+        public Task<Recipe> UpdateAsync(Recipe recipeUpdate);
 
-        public Task<RecipesEntities.Recipe> GetById(int RecipeId);
+        public Task<Recipe> GetByIdAsync(int RecipeId);
 
 
-        public Task<bool> Delete(RecipesEntities.Recipe recipeDelete);
+        public Task<bool> DeleteAsync(Recipe recipeDelete);
     }
 }

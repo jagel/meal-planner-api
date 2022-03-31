@@ -1,6 +1,6 @@
-﻿using MealPlanner.Domain.Entities.Recipes;
+﻿using JGL.Recipes.Domain.Entities;
 
-namespace MealPlanner.Domain.Recipes.Interfaces
+namespace JGL.Recipes.Domain.Interfaces
 {
     public interface IRecipeValidation
     {

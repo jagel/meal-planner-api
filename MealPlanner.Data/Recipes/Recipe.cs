@@ -1,7 +1,8 @@
-﻿using MealPlanner.Data.Globals;
-using MealPlanner.Data.Globals.Responses;
+﻿using System.ComponentModel.DataAnnotations;
+using JGL.Globals.Contracts.Models.Interfaces;
+using JGL.Globals.Contracts.Validations;
 
-namespace MealPlanner.Api.Models.Recipes
+namespace JGL.Recipes.Contracts.Models.Recipes
 {
     /// <summary>
     /// Recipe returns recipe model.
@@ -22,6 +23,8 @@ namespace MealPlanner.Api.Models.Recipes
         /// <example>
         /// Meatballs
         /// </example>
+        [Required(ErrorMessage = MessagesValidation.ErrorRequiredMessage)]
+        [MaxLength(DefinitionsValues.MAXLENGTH_NAME, ErrorMessage = MessagesValidation.ErrorMaxLengthMessage)]
         public string Name { get; set; }
 
 
@@ -29,9 +32,24 @@ namespace MealPlanner.Api.Models.Recipes
         /// Recipe Name
         /// </summary>
         /// <example>
-        /// Description updated
+        /// Description
         /// </example>
+        [MaxLength(DefinitionsValues.MAXLENGTH_DESCRIPTION, ErrorMessage = MessagesValidation.ErrorMaxLengthMessage)]
         public string Description { get; set; }
+
+        /// <summary>
+        /// Recipe Steps collection
+        /// </summary>
+        /// <example>
+        /// [{
+        ///     order : 1,
+        ///     description : 'Add water'
+        /// },{
+        ///     order : 2,
+        ///     description: 'Serve'
+        /// }]
+        /// </example>
+        public IEnumerable<RecipeSteps> Steps { get; set; }
 
         /// <summary>
         /// Created By

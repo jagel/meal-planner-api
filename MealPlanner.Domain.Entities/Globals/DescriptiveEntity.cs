@@ -5,7 +5,7 @@ namespace JGL.Infra.Domain.Entities
     public class DescriptiveEntity : IAuditEntity
     {
         public int Id { get; set; }
-        public string? Name { get; set; }
+        public string Name { get; set; }
         public string? Description { get; set; }
 
         //Audit Fields

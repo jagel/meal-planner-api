@@ -34,10 +34,12 @@ namespace MealPlanner.Infrastructure.DbSettings
 
             foreach (var entityEntry in updateEntries)
             {
+                entityEntry.Property(nameof(IAuditEntity.CreatedBy)).IsModified = false;
+                entityEntry.Property(nameof(IAuditEntity.CreatedDate)).IsModified = false;
+
                 ((IAuditEntity)entityEntry.Entity).UpdatedDate = _localization.GetDateTime();
                 ((IAuditEntity)entityEntry.Entity).UpdatedBy = _userProfile.GetUserEmail();
             }
-
             return base.SaveChangesAsync(cancellationToken);
         }
 
@@ -59,6 +61,9 @@ namespace MealPlanner.Infrastructure.DbSettings
 
             foreach (var entityEntry in updateEntries)
             {
+                entityEntry.Property(nameof(IAuditEntity.CreatedBy)).IsModified = false;
+                entityEntry.Property(nameof(IAuditEntity.CreatedDate)).IsModified = false;
+
                 ((IAuditEntity)entityEntry.Entity).UpdatedDate = _localization.GetDateTime();
                 ((IAuditEntity)entityEntry.Entity).UpdatedBy = _userProfile.GetUserEmail();
             }
