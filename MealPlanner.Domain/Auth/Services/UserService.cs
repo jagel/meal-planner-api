@@ -10,18 +10,23 @@ namespace MealPlanner.Domain.Auth.Services
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
         private readonly ISecurityService _securityService;
+        private readonly IUserValidationService _userValidationService;
 
         public UserService(IUserRepository userRepository,
-                           ISecurityService securityService, 
-                           IMapper mapper)
+                           ISecurityService securityService,
+                           IMapper mapper, 
+                           IUserValidationService userValidationService)
         {
             _userRepository = userRepository;
             _securityService = securityService;
             _mapper = mapper;
+            _userValidationService = userValidationService;
         }
 
         public async Task<UserResponse> CreateUserAsync(CreateUserRequest createUser)
         {
+            await _userValidationService.ValdateUniqueEmailAsync(createUser.Email);
+
             var user = _mapper.Map<User>(createUser);
 
             var (passworHash, passwordSalt) = _securityService.CreatePasswordHash(createUser.Password);

@@ -7,6 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 //Database configuration
 builder.Services.AddMySQLDatabase(builder.Configuration);
 
+//CORS
+builder.Services.AddCors();
+
+
 //Authentication configuration
 builder.Services.AddAuthenticationConfiguration(builder.Configuration);
 
@@ -17,8 +21,6 @@ builder.Services.AddStandardServicesApp();
 builder.Services.AddAuthenticationDI();
 builder.Services.AddRecipeServices();
 
-//CORS
-builder.Services.AddCors();
 
 //builder.Services.AddControllers();
 builder.Services.AddControllers( o => { o.Filters.Add(new AuthorizeFilter()); });
@@ -38,16 +40,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUi3();
 }
 
+app.UseHttpsRedirection();
+
 // global cors policy
 app.UseCors(x => x
-    .AllowAnyMethod()
+    .WithOrigins("https://localhost:3000","http://localhost:3000")
     .AllowAnyHeader()
-    .SetIsOriginAllowed(origin => true) // allow any origin
-    .AllowCredentials()); // allow credentials
-
-
-
-app.UseHttpsRedirection();
+    .AllowAnyMethod()
+    .AllowCredentials()
+); // allow credentials
 
 
 

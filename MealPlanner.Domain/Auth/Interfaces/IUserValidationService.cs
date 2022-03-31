@@ -1,7 +1,7 @@
 ﻿namespace MealPlanner.Domain.Auth.Interfaces
 {
-    interface IUserValidationService
+    public interface IUserValidationService
     {
-        Task ValdateUniqueEmail(string email);
+        Task ValdateUniqueEmailAsync(string email);
     }
 }

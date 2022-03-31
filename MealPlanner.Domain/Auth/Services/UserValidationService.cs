@@ -12,7 +12,7 @@ namespace MealPlanner.Domain.Auth.Services
             _userRepository = userRepository;
         }
 
-        public async Task ValdateUniqueEmail(string email)
+        public async Task ValdateUniqueEmailAsync(string email)
         {
             var userCreated = await _userRepository.GetUserByEmailAsync(email);
            if (userCreated != null)

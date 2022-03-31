@@ -50,7 +50,7 @@ CREATE TABLE `OrganizationUser` (
     `OrganizationId`        INTEGER,
     `UserId`                INTEGER,
 
-    CONSTRAINT `PK_OrganizationUser` PRIMARY KEY (`OrganizationUser`)
+    CONSTRAINT `PK_OrganizationUser` PRIMARY KEY (`OrganizationUserId`)
 );
 
 ALTER TABLE `OrganizationUser` ADD CONSTRAINT `Organization_OrganizationUser` 
