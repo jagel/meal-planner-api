@@ -1,6 +1,7 @@
 ﻿using MealPlanner.Data.Auth;
 using MealPlanner.Data.Globals;
 using MealPlanner.Domain.Auth.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MealPlanner.Api.Controllers
@@ -30,6 +31,7 @@ namespace MealPlanner.Api.Controllers
 
         [HttpPost("createAccount", Name = "[controller].CreateAccount")]
         [ProducesResponseType(typeof(ModelResponse<UserResponse>), StatusCodes.Status200OK)]
+        [AllowAnonymous]
         public async Task<IActionResult> CreateAccount(CreateUserRequest createUserRequest)
         {
             var userSaved = await _userService.CreateUserAsync(createUserRequest);
@@ -39,7 +41,7 @@ namespace MealPlanner.Api.Controllers
                 Data = userSaved
             };
 
-            return Ok(userSaved);
+            return Ok(respone);
         }
 
 

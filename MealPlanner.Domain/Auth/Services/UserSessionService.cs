@@ -1,7 +1,7 @@
 ﻿using MealPlanner.Data.Auth;
 using MealPlanner.Data.Auth.Claims;
 using MealPlanner.Domain.Auth.Interfaces;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -31,29 +31,41 @@ namespace MealPlanner.Domain.Auth.Services
             return userCredentialValid;
         }
 
-        public async Task LogInAsync(ApplicationUser applicationUser)
+        public async Task<ClaimsPrincipal> GetClaimsPrincipalByUserId(int userId)
         {
-           // var userClaims = _userClaimPRincipalFactory.CreateAsync(applicationUser);
+            var userDb = await _userRepository.GetUserByIdAsync(userId);
+
+            var claimsList = new List<Claim>
+            {
+                new Claim(ClaimTypes.Email , userDb.Email),
+                new Claim(ClaimTypes.NameIdentifier , userId.ToString())
+            };
+
+            var mainIdentity = new ClaimsIdentity(claimsList, CookieAuthenticationDefaults.AuthenticationScheme);
+            
+            var claimsPrincipal = new List<ClaimsIdentity>
+            {
+                mainIdentity
+            };
+
+            var principal = new ClaimsPrincipal(claimsPrincipal);
+            return principal;
         }
 
-        public string GenerateJwt(IEnumerable<Claim> userClaims)
+        public async Task<UserSessionResponse> GetUserSessionByUserId(int userId)
         {
-            var signInCredentials = _securityService.GetSignInCredentials();
-         
-            var token = new JwtSecurityToken(
-               claims: userClaims,
-               expires: DateTime.UtcNow.AddHours(1),
-               signingCredentials: signInCredentials
-            );
+            var dbUser = await _userRepository.GetUserByIdAsync(userId);
 
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-
-            return jwt;
+            return new UserSessionResponse
+            {
+                DisplayName = $"{dbUser.Name} {dbUser.Lastname}",
+                Email = dbUser.Email,
+                Language = "en"
+            };
         }
 
-        public Task<bool> LogOutAsync()
-        {
-            throw new NotImplementedException();
-        }
+     
+
+      
     }
 }

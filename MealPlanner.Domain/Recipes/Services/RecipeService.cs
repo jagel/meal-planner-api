@@ -30,7 +30,7 @@ namespace MealPlanner.Domain.Recipes.Services
         {
             var recipe = await _recipeRepository.GetById(recipeId);
 
-            _recipeValidation.IsEntityNull(recipe);
+            _recipeValidation.RecipeNotNullValidation(recipe);
 
             var recipeDeleted = await _recipeRepository.Delete(recipe);
             return recipeDeleted;
@@ -40,7 +40,7 @@ namespace MealPlanner.Domain.Recipes.Services
         {
             var recipe = await _recipeRepository.GetById(recipeId);
             
-            _recipeValidation.IsEntityNull(recipe);
+            _recipeValidation.RecipeNotNullValidation(recipe);
 
             var recipeResponse = _mapper.Map<Recipe>(recipe);
             return recipeResponse;

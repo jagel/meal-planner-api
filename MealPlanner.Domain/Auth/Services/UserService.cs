@@ -9,27 +9,24 @@ namespace MealPlanner.Domain.Auth.Services
     {
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
-        private readonly IOrganizationService _organizationService;
-        private readonly IOrganizationUserRepository _organizationUserRepository;
         private readonly ISecurityService _securityService;
+        private readonly IUserValidationService _userValidationService;
 
         public UserService(IUserRepository userRepository,
-                           IOrganizationService organizationService,
-                           IOrganizationUserRepository organizationUserRepository,
-                           ISecurityService securityService, 
-                           IMapper mapper)
+                           ISecurityService securityService,
+                           IMapper mapper, 
+                           IUserValidationService userValidationService)
         {
             _userRepository = userRepository;
-            _organizationService = organizationService;
-            _organizationUserRepository = organizationUserRepository;
             _securityService = securityService;
             _mapper = mapper;
+            _userValidationService = userValidationService;
         }
-
-
 
         public async Task<UserResponse> CreateUserAsync(CreateUserRequest createUser)
         {
+            await _userValidationService.ValdateUniqueEmailAsync(createUser.Email);
+
             var user = _mapper.Map<User>(createUser);
 
             var (passworHash, passwordSalt) = _securityService.CreatePasswordHash(createUser.Password);
@@ -38,12 +35,6 @@ namespace MealPlanner.Domain.Auth.Services
             user.PasswordSalt = passwordSalt;
 
             var userSaved = await _userRepository.CreateUserAsync(user);
-
-            var code = $"{userSaved.Email.Split('@').FirstOrDefault()}_{userSaved.Id}";
-            var organization = await _organizationService.CreateOrganizationAsync(code, userSaved.Id);
-
-            var organizationUser = await _organizationUserRepository.CreateOrganizationUserAsync(new OrganizationUser { OrganizationId = organization.Id, UserId = userSaved.Id, UserStatus = EUserStatus.Active});
-
             var response = _mapper.Map<UserResponse>(userSaved);
 
             return response;
@@ -56,6 +47,12 @@ namespace MealPlanner.Domain.Auth.Services
             var userResponse = _mapper.Map<UserResponse>(user);
 
             return userResponse;
+        }
+
+        public async Task<int> GetUserIdByEmailAsync(string email)
+        {
+            var user = await _userRepository.GetUserByEmailAsync(email);
+            return user.Id;
         }
 
         public async Task<UserResponse> UpdateUserAsync(CreateUserRequest updateUser)

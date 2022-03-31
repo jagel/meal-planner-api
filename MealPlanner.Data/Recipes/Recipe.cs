@@ -1,4 +1,5 @@
 ﻿using MealPlanner.Data.Globals;
+using MealPlanner.Data.Globals.Responses;
 
 namespace MealPlanner.Api.Models.Recipes
 {

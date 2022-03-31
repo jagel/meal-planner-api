@@ -1,11 +1,13 @@
-﻿namespace MealPlanner.Api
+﻿namespace MealPlanner.Daa.Definitions
 {
     public static class Properties
     {
         public static class ConfigurationVariables
         {
             public static string DatabaseConnecion = "connectionString:dbConnection";
-
+            public static string PrivateToken = "privateTokenKey";
+            public static string TokenCookie = "jwt";
+            
             public static class Google
             {
                 public static string ClientId = "google.clientId";

@@ -4,6 +4,6 @@ namespace MealPlanner.Domain.Recipes.Interfaces
 {
     public interface IRecipeValidation
     {
-        public void IsEntityNull(Recipe recipe);
+        public void RecipeNotNullValidation(Recipe recipe);
     }
 }

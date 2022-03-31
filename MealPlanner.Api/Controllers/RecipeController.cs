@@ -1,5 +1,6 @@
 ﻿using MealPlanner.Api.Models.Recipes;
 using MealPlanner.Data.Globals;
+using MealPlanner.Data.Globals.Responses;
 using MealPlanner.Domain.Recipes.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -51,6 +52,9 @@ namespace MealPlanner.Api.Controllers
                 Data = recipe
             };
 
+            if (recipeResponse.HasErrors)
+                recipeResponse.ErrorResponse = ErrorResponses.InternalErrorResponse;
+           
             return new OkObjectResult(recipeResponse);
         }
 

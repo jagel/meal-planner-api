@@ -19,7 +19,7 @@
         /// <example>
         /// 
         /// </example>
-        public EntityResponse? ErrorResponse { get; set; }
+        public ModelErrorResponse? ErrorResponse { get; set; }
 
         /// <summary>
         /// Model Response

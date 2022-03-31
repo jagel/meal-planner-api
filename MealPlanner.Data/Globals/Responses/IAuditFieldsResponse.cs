@@ -1,4 +1,4 @@
-﻿namespace MealPlanner.Data.Globals
+﻿namespace MealPlanner.Data.Globals.Responses
 {
     public interface IAuditFieldsResponse
     {

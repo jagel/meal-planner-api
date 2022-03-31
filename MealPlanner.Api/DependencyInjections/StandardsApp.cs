@@ -8,11 +8,12 @@ namespace MealPlanner.Api.DependencyInjections
     internal static class StandardsApp
     {
         
-        public static void AddStandardServicesApp(this IServiceCollection service)
+        public static void AddStandardServicesApp(this IServiceCollection services)
         {
-            service.AddAutoMapper(typeof(MappingProfile));
-            service.AddScoped<IUserProfile, UserProfile>();
-            service.AddScoped<ILocalization, Localization>();
+            services.AddHttpContextAccessor();
+            services.AddAutoMapper(typeof(MappingProfile));
+            services.AddScoped<IUserProfile, UserProfile>();
+            services.AddScoped<ILocalization, Localization>();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using MealPlanner.Data.Auth;
-using MealPlanner.Data.Auth.Claims;
 using System.Security.Claims;
 
 namespace MealPlanner.Domain.Auth.Interfaces
@@ -8,10 +7,8 @@ namespace MealPlanner.Domain.Auth.Interfaces
     {
         Task<bool> AreCredentialValidAsync(UserLoginRequest user);
 
-        Task LogInAsync(ApplicationUser applicationUser);
+        Task<UserSessionResponse> GetUserSessionByUserId(int userId);
 
-        Task<bool> LogOutAsync();
-
-        string GenerateJwt(IEnumerable<Claim> userClaims);
+        Task<ClaimsPrincipal> GetClaimsPrincipalByUserId(int userId);
     }
 }

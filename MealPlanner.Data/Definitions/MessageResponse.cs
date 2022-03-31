@@ -1,12 +1,24 @@
-﻿namespace MealPlanner.Daa.Definitions
+﻿using MealPlanner.Data.Definitions;
+
+namespace MealPlanner.Daa.Definitions
 {
     public class MessageResponse
     {
 
-        public static string GETNOTFOUNDMESSAGE(string lang = "en")
-        {
-            return lang == "en" ? "Item Not Found." : "Elemento no encontrado";
-        }
+        //public static string GETNOTFOUNDMESSAGE(string lang = AppLanguage.English)
+        //{
+        //    string text = "";
+
+        //    switch (lang)
+        //    {
+        //        case AppLanguage.English: text = "Item not found."; break;
+        //        case AppLanguage.Spanish: text = "Elemento no encontrado."; break;
+        //        default: text = "Item not found."; break;
+        //    }
+        //    return text;
+        //}
+
+
         public static string ENTITYNOTFOUND = "Entity not Found.";
         public static string NOTFOUND = "Not found:";
 
