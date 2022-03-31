@@ -4,5 +4,6 @@ namespace MealPlanner.Domain.Entities.Recipes
 {
     public class Recipe : DescriptiveEntity
     {
+        public string Steps { get; set; }
     }
 }

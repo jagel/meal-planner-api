@@ -1,4 +1,4 @@
-﻿using MealPlanner.Api.Models.Recipes;
+﻿using JGL.Recipe.Contracts.Models.Recipes;
 using MealPlanner.Data.Globals;
 using MealPlanner.Data.Globals.Responses;
 using MealPlanner.Domain.Recipes.Interfaces;

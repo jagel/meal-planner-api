@@ -1,5 +1,4 @@
-﻿
-using MealPlanner.Api.Models.Recipes;
+﻿using JGL.Recipe.Contracts.Models.Recipes;
 
 namespace MealPlanner.Domain.Recipes.Interfaces
 {

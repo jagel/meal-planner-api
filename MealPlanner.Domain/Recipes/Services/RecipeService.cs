@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
-using MealPlanner.Api.Models.Recipes;
+using JGL.Recipe.Contracts.Models.Recipes;
 using MealPlanner.Domain.Recipes.Interfaces;
 using RecipesEntities = MealPlanner.Domain.Entities.Recipes;
+
 namespace MealPlanner.Domain.Recipes.Services
 {
     public class RecipeService : IRecipeService
