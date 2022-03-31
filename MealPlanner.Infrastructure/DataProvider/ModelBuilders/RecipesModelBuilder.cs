@@ -1,8 +1,8 @@
-﻿using MealPlanner.Domain.Entities.Recipes;
+﻿using JGL.Recipes.Domain.Entities;
 using MealPlanner.Infrastructure.DbSettings.Definitions;
 using MealPlanner.Infrastructure.DbSettings.ModelBuilders;
 
-namespace MealPlanner.Infrastructure.DataProvider.ModelBuilder
+namespace JGL.Recipes.Infrastructure.DataProvider.ModelBuilders
 {
     public class RecipesModelBuilder : DescriptiveEntityBuilder<Recipe>
     {

@@ -49,8 +49,7 @@ namespace JGL.Recipes.Contracts.Models.Recipes
         ///     description: 'Serve'
         /// }]
         /// </example>
-        [MaxLength(DefinitionsValues.MAXLENGTH_DESCRIPTION, ErrorMessage = MessagesValidation.ErrorMaxLengthMessage)]
-        public IEnumerable<RecipeSteps> RecipeSteps { get; set; }
+        public IEnumerable<RecipeSteps> Steps { get; set; }
 
         /// <summary>
         /// Created By

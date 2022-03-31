@@ -1,6 +1,7 @@
-﻿using MealPlanner.Domain.Recipes.Interfaces;
-using MealPlanner.Domain.Recipes.Services;
-using MealPlanner.Infrastructure.DataProvider.Repositories;
+﻿using JGL.Recipes.Domain.Services;
+using JGL.Recipes.Infrastructure.DataProvider.Repositories;
+using JGL.Recipes.Domain.Interfaces;
+using JGL.Recipes.Domain.Validations;
 
 namespace MealPlanner.Api.DependencyInjections
 {

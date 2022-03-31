@@ -1,6 +1,6 @@
 ﻿using JGL.Recipes.Contracts.Models.Recipes;
 
-namespace MealPlanner.Domain.Recipes.Interfaces
+namespace JGL.Recipes.Domain.Interfaces
 {
     public interface IRecipeService
     {

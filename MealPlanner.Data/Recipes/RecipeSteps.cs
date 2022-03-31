@@ -14,7 +14,7 @@ namespace JGL.Recipes.Contracts.Models.Recipes
         /// <example>
         /// Meatballs
         /// </example>
-        [MinLength(1, ErrorMessage = MessagesValidation.ErrorMinLNuberMessage)]
+        [Required(ErrorMessage = MessagesValidation.ErrorRequiredMessage)]
         public int Order { get; set; }
 
         /// <summary>

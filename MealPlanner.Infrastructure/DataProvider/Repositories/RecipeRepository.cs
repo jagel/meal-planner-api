@@ -1,9 +1,9 @@
-﻿using MealPlanner.Domain.Entities.Recipes;
-using MealPlanner.Domain.Recipes.Interfaces;
+﻿using JGL.Recipes.Domain.Entities;
+using JGL.Recipes.Domain.Interfaces;
 using MealPlanner.Infrastructure.DataProvider.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace MealPlanner.Infrastructure.DataProvider.Repositories
+namespace JGL.Recipes.Infrastructure.DataProvider.Repositories
 {
     public class RecipeRepository : IRecipeRepository
     {

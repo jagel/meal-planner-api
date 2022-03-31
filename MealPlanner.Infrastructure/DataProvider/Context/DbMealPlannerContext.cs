@@ -1,5 +1,5 @@
-﻿using MealPlanner.Domain.Entities.Auth;
-using MealPlanner.Domain.Entities.Recipes;
+﻿using JGL.Recipes.Domain.Entities;
+using MealPlanner.Domain.Entities.Auth;
 using MealPlanner.Domain.Infra.Localizations;
 using MealPlanner.Domain.Infra.Profile;
 using MealPlanner.Infrastructure.DataProvider.ModelBuilder;
