@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  mealplanner.api:
+    image: ${DOCKER_REGISTRY-}mealplannerapi
+    container_name: meal-planner-api
+    build:
+      context: .
+      dockerfile: MealPlanner.Api/Dockerfile
+    ports:
+      - 8181:80
+      - 4141:443
+
+networks:
+  default:
+    external:
+      name: nat
