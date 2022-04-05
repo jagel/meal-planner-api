@@ -9,9 +9,13 @@ namespace MealPlanner.Api.DependencyInjections
     {
         public static void AddRecipeServices(this IServiceCollection services)
         {
-            services.AddTransient<IRecipeRepository, RecipeRepository>();
-            services.AddTransient<IRecipeService, RecipeService>();
             services.AddTransient<IRecipeValidation, RecipeValidation>();
+
+            services.AddTransient<IRecipeService, RecipeService>();
+            services.AddTransient<IRecipeSearchService, RecipeSearchService>();
+
+            services.AddTransient<IRecipeRepository, RecipeRepository>();
+
         }
     }
 }

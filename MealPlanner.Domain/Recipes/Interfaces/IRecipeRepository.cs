@@ -1,5 +1,6 @@
 ﻿
 using JGL.Recipes.Domain.Entities;
+using MealPlanner.Domain.Entities.Recipes.Filters;
 
 namespace JGL.Recipes.Domain.Interfaces
 {
@@ -11,6 +12,7 @@ namespace JGL.Recipes.Domain.Interfaces
 
         public Task<Recipe> GetByIdAsync(int RecipeId);
 
+        public Task<IEnumerable<Recipe>> GetByParamsAsync(RecipeFilters recipeFilters);
 
         public Task<bool> DeleteAsync(Recipe recipeDelete);
     }
