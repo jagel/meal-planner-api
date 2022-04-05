@@ -8,10 +8,6 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["MealPlanner.Api/MealPlanner.Api.csproj", "MealPlanner.Api/"]
-COPY ["MealPlanner.Data/MealPlanner.Data.csproj", "MealPlanner.Data/"]
-COPY ["MealPlanner.Infrastructure/MealPlanner.Infrastructure.csproj", "MealPlanner.Infrastructure/"]
-COPY ["MealPlanner.Domain.Entities/MealPlanner.Domain.Entities.csproj", "MealPlanner.Domain.Entities/"]
-COPY ["MealPlanner.Domain/MealPlanner.Domain.csproj", "MealPlanner.Domain/"]
 RUN dotnet restore "MealPlanner.Api/MealPlanner.Api.csproj"
 COPY . .
 WORKDIR "/src/MealPlanner.Api"
