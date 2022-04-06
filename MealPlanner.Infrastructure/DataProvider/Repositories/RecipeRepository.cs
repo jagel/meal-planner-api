@@ -1,6 +1,5 @@
 ﻿using JGL.Recipes.Domain.Entities;
 using JGL.Recipes.Domain.Interfaces;
-using LinqKit;
 using MealPlanner.Domain.Entities.Recipes.Filters;
 using MealPlanner.Infrastructure.DataProvider.Context;
 using Microsoft.EntityFrameworkCore;
@@ -47,15 +46,12 @@ namespace JGL.Recipes.Infrastructure.DataProvider.Repositories
         public async Task<IEnumerable<Recipe>> GetByParamsAsync(RecipeFilters recipeFilters)
         {
             var query = from u in _context.Set<Recipe>() select u;
-            var predicate = PredicateBuilder.False<Recipe>();
+            //var predicate = PredicateBuilder.False<Recipe>();
 
-            var recipeQuery = _context.Set<Recipe>();
-                predicate?.And(x => x.Name == recipeFilters.Name);
-            
-            var recipes = await recipeQuery
-                .Where(predicate)
-                .AsNoTracking()
-                .ToListAsync();
+            //var recipeQuery = _context.Set<Recipe>();
+            //predicate?.And(x => x.Name == recipeFilters.Name);
+
+            var recipes = await query.Where(x => x.Name.Contains(recipeFilters.Name)).ToListAsync();
             return recipes;
         }
 
