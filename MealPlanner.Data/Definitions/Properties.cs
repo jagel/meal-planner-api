@@ -1,4 +1,4 @@
-﻿namespace MealPlanner.Daa.Definitions
+﻿namespace JGL.Data.Definitions
 {
     public static class Properties
     {

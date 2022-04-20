@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MealPlanner.Data.Auth.Claims
+namespace JGL.Data.Auth.Claims
 {
     public class GoogleClaims
     {

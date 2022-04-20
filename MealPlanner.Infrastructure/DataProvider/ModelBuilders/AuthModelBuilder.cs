@@ -1,13 +1,13 @@
-﻿using MealPlanner.Domain.Entities.Auth;
-using MealPlanner.Infrastructure.DbSettings.Definitions;
+﻿using JGL.Security.Auth.Domain.Entities;
+using JGL.Infrastructure.DbSettings.Definitions;
 using Microsoft.EntityFrameworkCore;
-using MealPlanner.Infrastructure.DbSettings.Extensions;
+using JGL.Infrastructure.DbSettings.Extensions;
 
-namespace MealPlanner.Infrastructure.DataProvider.ModelBuilder
+namespace JGL.Security.Auth.Infrastructure.DataProvider.ModelBuilder
 {
     public static class AuthModelBuilder
     {
-        public static void BuilAuthdEntities(this Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
+        public static void BuilAuthEntities(this Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
         {
             OrganizationModelBuilder(modelBuilder);
             UserModelBuilder(modelBuilder);

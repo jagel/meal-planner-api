@@ -3,7 +3,7 @@ using NSwag.Generation.AspNetCore;
 using NSwag.Generation.Processors;
 using NSwag.Generation.Processors.Security;
 
-namespace MealPlanner.Api.DependencyInjections
+namespace JGL.Api.DependencyInjections
 {
     public static class DocumentationConfiguration
     {

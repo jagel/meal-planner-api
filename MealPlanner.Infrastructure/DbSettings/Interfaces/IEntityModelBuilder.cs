@@ -1,4 +1,4 @@
-﻿namespace MealPlanner.Infrastructure.DbSettings.Interfaces
+﻿namespace JGL.Infrastructure.DbSettings.Interfaces
 {
     public interface IEntityModelBuilder
     {

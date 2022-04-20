@@ -1,9 +1,9 @@
-﻿using MealPlanner.Domain.Auth.Interfaces;
-using MealPlanner.Domain.Auth.Services;
-using MealPlanner.Infrastructure.DataProvider.Repositories;
+﻿using JGL.Security.Auth.Domain.Interfaces;
+using JGL.Security.Auth.Domain.Services;
+using JGL.Security.Auth.Infrastructure.DataProvider.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
-namespace MealPlanner.Api.DependencyInjections
+namespace JGL.Security.Auth.API.DependencyInjections
 {
     public static class AuthDIExtension
     {
@@ -22,10 +22,9 @@ namespace MealPlanner.Api.DependencyInjections
 
             //service.AddTransient<IUserClaimsPrincipalFactory<ApplicationUser>, AuthUserClaimsPrincipalFactory>();
             service.AddScoped<IJwtService, JwtService>();
-
+            service.AddScoped<IAuthService, AuthService>();
 
             service.AddScoped<ISecurityService, SecurityService>();
-            service.AddScoped<IUserSessionService, UserSessionService>();
 
             service.AddScoped<IUserService, UserService>();
             service.AddScoped<IOrganizationService, OrganizationService>();
@@ -34,9 +33,9 @@ namespace MealPlanner.Api.DependencyInjections
             service.AddScoped<IOrganizationUserRepository, OrganizationUserRepository>();
             service.AddScoped<IOrganizationRepository, OrganizationRepository>();
 
-            service.AddScoped<IUserValidationService, UserValidationService>();
+            service.AddScoped<IUserSessionValidationService, UserSessionValidationService>();
         }
 
-        
+
     }
 }

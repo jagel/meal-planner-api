@@ -1,27 +1,25 @@
 ﻿using AutoMapper;
-using MealPlanner.Data.Auth;
-using MealPlanner.Domain.Auth.Interfaces;
-using MealPlanner.Domain.Entities.Auth;
+using JGL.Security.Auth.Domain.Interfaces;
+using JGL.Security.Auth.Domain.Entities;
+using JGL.Security.Auth.Data.Requests;
+using JGL.Security.Auth.Data.Responses;
 
-namespace MealPlanner.Domain.Auth.Services
+namespace JGL.Security.Auth.Domain.Services
 {
     public class UserAccountService : IUserAccountService
     {
         private readonly IMapper _mapper;
         private readonly IOrganizationService _organizationService;
         private readonly IOrganizationUserRepository _organizationUserRepository;
-        private readonly ISecurityService _securityService;
         private readonly IUserService _userService;
 
         public UserAccountService(IOrganizationService organizationService,
                            IOrganizationUserRepository organizationUserRepository,
-                           ISecurityService securityService,
                            IMapper mapper, 
                            IUserService userService)
         {
             _organizationService = organizationService;
             _organizationUserRepository = organizationUserRepository;
-            _securityService = securityService;
             _mapper = mapper;
             _userService = userService;
         }

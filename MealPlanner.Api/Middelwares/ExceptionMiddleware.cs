@@ -1,6 +1,6 @@
-﻿using MealPlanner.Data.Globals.Exceptions;
+﻿using JGL.Infra.ErrorManager.Domain.Exceptions;
 
-namespace MealPlanner.Api.Middelwares
+namespace JGL.Api.Middelwares
 {
     public class ExceptionMiddleware
     {
@@ -18,9 +18,11 @@ namespace MealPlanner.Api.Middelwares
             {
                 await _next(context);
             }
-            catch (AppBaseException ex)
+            catch (JGLAppException ex)
             {
-                var response = new Data.Globals.ModelResponse<string>
+                ex.GenerateErrorResponse();
+
+                var response = new JGLModelResponse<string>
                 {
                     Data = null,
                     ErrorResponse = ex.ErrorResponse

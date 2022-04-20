@@ -1,7 +1,7 @@
-﻿using MealPlanner.Domain.Auth.Interfaces;
-using MealPlanner.Domain.Entities.Auth;
+﻿using JGL.Security.Auth.Domain.Interfaces;
+using JGL.Security.Auth.Domain.Entities;
 
-namespace MealPlanner.Domain.Auth.Services
+namespace JGL.Security.Auth.Domain.Services
 {
     public class OrganizationService : IOrganizationService
     {

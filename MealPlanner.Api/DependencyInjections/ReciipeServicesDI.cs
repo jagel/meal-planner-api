@@ -3,7 +3,7 @@ using JGL.Recipes.Infrastructure.DataProvider.Repositories;
 using JGL.Recipes.Domain.Interfaces;
 using JGL.Recipes.Domain.Validations;
 
-namespace MealPlanner.Api.DependencyInjections
+namespace JGL.Api.DependencyInjections
 {
     public static class ReciipeServicesDI
     {

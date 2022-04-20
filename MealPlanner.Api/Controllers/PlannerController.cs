@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MealPlanner.Api.Controllers
+namespace JGL.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

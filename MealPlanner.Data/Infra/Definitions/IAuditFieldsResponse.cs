@@ -1,4 +1,4 @@
-﻿namespace JGL.Globals.Contracts.Models.Interfaces
+﻿namespace JGL.Infra.Globals.Data.Definitions
 {
     public interface IAuditFieldsResponse
     {

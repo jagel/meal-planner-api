@@ -1,6 +1,6 @@
-﻿using MealPlanner.Domain.Entities.Auth;
+﻿using JGL.Security.Auth.Domain.Entities;
 
-namespace MealPlanner.Domain.Auth.Interfaces
+namespace JGL.Security.Auth.Domain.Interfaces
 {
     public interface IUserRepository
     {

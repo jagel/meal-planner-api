@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace MealPlanner.Infrastructure.DbSettings.Extensions
+namespace JGL.Infrastructure.DbSettings.Extensions
 {
     public static class ConvertersExtension
     {

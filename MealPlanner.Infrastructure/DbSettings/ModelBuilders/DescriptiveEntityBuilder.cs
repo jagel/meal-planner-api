@@ -1,10 +1,10 @@
 ﻿using JGL.Infra.Domain.Entities;
-using MealPlanner.Infrastructure.DbSettings.Definitions;
-using MealPlanner.Infrastructure.DbSettings.Interfaces;
+using JGL.Infrastructure.DbSettings.Definitions;
+using JGL.Infrastructure.DbSettings.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace MealPlanner.Infrastructure.DbSettings.ModelBuilders
+namespace JGL.Infrastructure.DbSettings.ModelBuilders
 {
     public abstract class DescriptiveEntityBuilder<TEntity> : IEntityModelBuilder where TEntity : DescriptiveEntity, new()
     {

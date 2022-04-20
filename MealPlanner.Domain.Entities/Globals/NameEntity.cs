@@ -1,4 +1,4 @@
-﻿using MealPlanner.Domain.Entities.Globals.Interfaces;
+﻿using JGL.Domain.Entities.Globals.Interfaces;
 
 namespace JGL.Infra.Domain.Entities
 {

@@ -1,7 +1,7 @@
 ﻿using JGL.Recipes.Domain.Entities;
 using JGL.Recipes.Domain.Interfaces;
-using MealPlanner.Domain.Entities.Recipes.Filters;
-using MealPlanner.Infrastructure.DataProvider.Context;
+using JGL.Domain.Entities.Recipes.Filters;
+using JGL.Infrastructure.DataProvider.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 

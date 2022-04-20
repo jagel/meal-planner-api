@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MealPlanner.Domain.Entities.Globals.Interfaces
+namespace JGL.Domain.Entities.Globals.Interfaces
 {
     public interface IAuditEntity
     {

@@ -1,4 +1,4 @@
-﻿namespace MealPlanner.Domain.Entities.Auth
+﻿namespace JGL.Security.Auth.Domain.Entities
 {
     public enum EUserStatus
     {

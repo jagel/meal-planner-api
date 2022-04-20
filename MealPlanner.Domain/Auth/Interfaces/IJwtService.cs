@@ -1,11 +1,11 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using JGL.Security.Auth.Domain.Entities;
 
-namespace MealPlanner.Domain.Auth.Interfaces
+namespace JGL.Security.Auth.Domain.Interfaces
 {
     public interface IJwtService
     {
-        string GenerateToken(int id);
-
+        string GenerateToken(User uer);
         JwtSecurityToken VerifyToken(string jwt);
     }
 }

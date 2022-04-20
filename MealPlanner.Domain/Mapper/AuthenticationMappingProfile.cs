@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
-using MealPlanner.Data.Auth;
-using MealPlanner.Domain.Entities.Auth;
+using JGL.Security.Auth.Domain.Entities;
+using JGL.Security.Auth.Data.Requests;
+using JGL.Security.Auth.Data.Responses;
 
-namespace MealPlanner.Domain.Mapper
+namespace JGL.Security.Auth.Domain.Mapper
 {
     public class AuthenticationMappingProfile : Profile
     {
@@ -14,6 +15,12 @@ namespace MealPlanner.Domain.Mapper
             CreateMap<UserResponse, User>()
                 .ForMember(dest => dest.Id, from => from.MapFrom(src => src.UserId))
                 .ReverseMap();
+
+            CreateMap<User, UserSessionResponse>()
+                .ForMember(dest => dest.DisplayName, from => from.MapFrom(src => src.Username))
+                .ReverseMap();
+
+            
         }
 
     }

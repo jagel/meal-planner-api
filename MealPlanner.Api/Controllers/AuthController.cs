@@ -1,13 +1,12 @@
 ﻿using JGL.Globals.Api.Controllers;
-using MealPlanner.Data.Auth;
-using MealPlanner.Domain.Auth.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
+using JGL.Security.Auth.Data.Requests;
+using JGL.Security.Auth.Domain.Interfaces;
 
-namespace MealPlanner.Api.Controllers
+namespace JGL.Api.Controllers
 {
     /// <summary>
     /// Authentication controller
@@ -18,19 +17,13 @@ namespace MealPlanner.Api.Controllers
     public class AuthController : BaseController
     {
         private readonly ILogger<AuthController> _logger;
-        private readonly IUserSessionService _userSessionService;
-        private readonly IUserService _userService;
-        private readonly IJwtService _jwtService;
+        private readonly IAuthService _authService;
 
-        public AuthController(IJwtService jwtService,
-            ILogger<AuthController> logger,
-            IUserSessionService userSessionService, 
-            IUserService userService)
+        public AuthController(ILogger<AuthController> logger,
+            IAuthService authService)
         {
-            _jwtService = jwtService;
             _logger = logger;
-            _userSessionService = userSessionService;
-            _userService = userService;
+            _authService = authService;
         }
 
         /// <summary>
@@ -45,77 +38,37 @@ namespace MealPlanner.Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (!await _userSessionService.AreCredentialValidAsync(userRequest))
-                return Unauthorized();
+            
+            var authResponse = await _authService.LoginAsync(userRequest);
 
-            var userId = await _userService.GetUserIdByEmailAsync(userRequest.Email);
-            var jwt = _jwtService.GenerateToken(userId);
-
-            Response.Cookies.Append(ConfigVar.TokenCookie, jwt, new CookieOptions
+            if (!authResponse.Authenticated)
             {
-                HttpOnly = true
-            });
+                return Ok(authResponse.ErrorResponse);
+            }
+            _logger.LogWarning("User {0} logged in by user/password", userRequest.Email);
+            Response.Cookies.Delete(ConfigVar.TokenCookie);
+            Response.Cookies.Append(ConfigVar.TokenCookie, authResponse.Jwt, new CookieOptions{HttpOnly = true,});
 
-            var properties = new AuthenticationProperties { IsPersistent = true };
-            var claimPrincipal = await _userSessionService.GetClaimsPrincipalByUserId(userId);
+            var properties = new AuthenticationProperties { IsPersistent = userRequest.RememberAccount??false };
 
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
-                claimPrincipal,
+                authResponse.ClaimsPrincipal,
                 properties);
 
             return Ok("success");
         }
 
-        [HttpGet("getUser", Name ="[controller].getUser")]
-        [AllowAnonymous]
-        public async Task<IActionResult> GetUser()
-        {
-            try
-            {
-                var jwt = Request.Cookies[ConfigVar.TokenCookie];
-                var token = _jwtService.VerifyToken(jwt);
-                int userId = int.Parse(token.Issuer);
-
-                var userSession = await _userSessionService.GetUserSessionByUserId(userId);
-
-                var response = new ModelResponse<UserSessionResponse>
-                {
-                    Data = userSession
-                };
-
-                return Ok(response);
-            }
-            catch
-            {
-                var errorResponse = new ModelResponse<UserSessionResponse>
-                {
-                    ErrorResponse = ErrorResponses.UnauthorizedErrorResponse
-                };
-                return Unauthorized(errorResponse);
-            }
-        }
-
-
         [HttpGet("logout", Name = "[controller].logout")]
         public async Task<IActionResult> Logout()
         {
+            await _authService.LogoutAsync();
+
             Response.Cookies.Delete(ConfigVar.TokenCookie);
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return Redirect("/");
         }
 
-        [AllowAnonymous]
-        [HttpGet("denied", Name = "[controller].Denied")]
-        public async Task<IActionResult> Denied(string ReturnUrl= "/")
-        {
-            var errorResponse = await Task.Run(() => new ModelResponse<UserSessionResponse>
-            {
-                ErrorResponse = ErrorResponses.UnauthorizedErrorResponse
-            });
-
-            return Unauthorized(errorResponse);
-        }
         /*
 private readonly IUserSessionService _userSessionService;
 private readonly ILogger<AuthController> _logger;

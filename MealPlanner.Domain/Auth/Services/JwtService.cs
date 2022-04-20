@@ -1,16 +1,13 @@
-﻿using MealPlanner.Daa.Definitions;
-using MealPlanner.Domain.Auth.Interfaces;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
+using JGL.Data.Definitions;
+using JGL.Security.Auth.Domain.Interfaces;
+using JGL.Security.Auth.Domain.Entities;
+using JGL.Security.Auth.Domain.Extensions;
 
-namespace MealPlanner.Domain.Auth.Services
+namespace JGL.Security.Auth.Domain.Services
 {
     public class JwtService : IJwtService
     {
@@ -21,23 +18,19 @@ namespace MealPlanner.Domain.Auth.Services
             _configuration = configuration;
         }
 
-
-        public string GenerateToken(int id)
+        public string GenerateToken(User user)
         {
-            var symetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-               _configuration.GetValue<string>(Properties.ConfigurationVariables.PrivateToken)
+            var symetricSecurityKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(
+                    _configuration.GetValue<string>(Properties.ConfigurationVariables.PrivateToken)
                ));
+
             var credentials = new SigningCredentials(symetricSecurityKey, SecurityAlgorithms.HmacSha256Signature);
             var header = new JwtHeader(credentials);
 
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Email , "email@example"),
-                new Claim(ClaimTypes.NameIdentifier , id.ToString())
-            };
+            var claims = user.ToClaimList();
 
-
-            var payload = new JwtPayload(id.ToString(), audience: null, claims: claims, notBefore: null, expires: DateTime.Today.AddDays(1));
+            var payload = new JwtPayload(user.Id.ToString(), audience: null, claims: claims, notBefore: null, expires: DateTime.Today.AddDays(1));
             var securityToken = new JwtSecurityToken(header, payload);
 
             return new JwtSecurityTokenHandler().WriteToken(securityToken);

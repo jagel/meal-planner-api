@@ -1,7 +1,7 @@
-﻿using MealPlanner.Infrastructure.DbSettings.Interfaces;
+﻿using JGL.Infrastructure.DbSettings.Interfaces;
 using System.Reflection;
 
-namespace MealPlanner.Infrastructure.DbSettings.Extensions
+namespace JGL.Infrastructure.DbSettings.Extensions
 {
     public static class ModelBuilderExtension
     {

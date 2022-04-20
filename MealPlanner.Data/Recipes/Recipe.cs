@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using JGL.Globals.Contracts.Models.Interfaces;
 using JGL.Globals.Contracts.Validations;
+using JGL.Infra.Globals.Data.Definitions;
 
 namespace JGL.Recipes.Contracts.Models.Recipes
 {
