@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MealPlanner.Data.Auth
+namespace JGL.Security.Auth.Data.Requests
 {
     /// <summary>
     /// Recipe returns recipe model.
@@ -25,5 +25,13 @@ namespace MealPlanner.Data.Auth
         /// </example>
         [Required]
         public string Password { get; set; }
+
+        /// <summary>
+        /// Remember account, persist user session active (optional)
+        /// </summary>
+        /// <example>
+        /// false
+        /// </example>
+        public bool? RememberAccount { get; set; }
     }
 }

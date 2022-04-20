@@ -1,7 +1,7 @@
-﻿using MealPlanner.Infrastructure.DataProvider.Context;
+﻿using JGL.Infrastructure.DataProvider.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace MealPlanner.Api.DependencyInjections
+namespace JGL.Api.DependencyInjections
 {
     public static class DatabaseServicesDI
     {

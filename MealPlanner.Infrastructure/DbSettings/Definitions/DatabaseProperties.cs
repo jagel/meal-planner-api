@@ -1,4 +1,4 @@
-﻿namespace MealPlanner.Infrastructure.DbSettings.Definitions
+﻿namespace JGL.Infrastructure.DbSettings.Definitions
 {
     public static class DatabaseProperties
     {

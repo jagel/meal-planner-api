@@ -1,4 +1,4 @@
-﻿namespace MealPlanner.Api.Definitions
+﻿namespace JGL.Api.Definitions
 {
     public class MessageResponse
     {

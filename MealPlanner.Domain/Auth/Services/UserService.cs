@@ -1,31 +1,32 @@
 ﻿using AutoMapper;
-using MealPlanner.Data.Auth;
-using MealPlanner.Domain.Auth.Interfaces;
-using MealPlanner.Domain.Entities.Auth;
+using JGL.Security.Auth.Domain.Interfaces;
+using JGL.Security.Auth.Domain.Entities;
+using JGL.Security.Auth.Data.Requests;
+using JGL.Security.Auth.Data.Responses;
 
-namespace MealPlanner.Domain.Auth.Services
+namespace JGL.Security.Auth.Domain.Services
 {
     public class UserService : IUserService
     {
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
         private readonly ISecurityService _securityService;
-        private readonly IUserValidationService _userValidationService;
+        private readonly IUserSessionValidationService _userSessionValidationService;
 
         public UserService(IUserRepository userRepository,
                            ISecurityService securityService,
-                           IMapper mapper, 
-                           IUserValidationService userValidationService)
+                           IMapper mapper,
+                           IUserSessionValidationService userSessionValidationService)
         {
             _userRepository = userRepository;
             _securityService = securityService;
             _mapper = mapper;
-            _userValidationService = userValidationService;
+            _userSessionValidationService = userSessionValidationService;
         }
 
         public async Task<UserResponse> CreateUserAsync(CreateUserRequest createUser)
         {
-            await _userValidationService.ValdateUniqueEmailAsync(createUser.Email);
+            await _userSessionValidationService.ValdateUniqueEmailAsync(createUser.Email);
 
             var user = _mapper.Map<User>(createUser);
 
@@ -40,19 +41,13 @@ namespace MealPlanner.Domain.Auth.Services
             return response;
         }
 
-        public async Task<UserResponse> GetUserByIdAsync(int userId)
+        public async Task<UserSessionResponse> GetUserSessionByIdAsync(int userId)
         {
             var user = await _userRepository.GetUserByIdAsync(userId);
 
-            var userResponse = _mapper.Map<UserResponse>(user);
+            var userSessionResponse = _mapper.Map<UserSessionResponse>(user);
 
-            return userResponse;
-        }
-
-        public async Task<int> GetUserIdByEmailAsync(string email)
-        {
-            var user = await _userRepository.GetUserByEmailAsync(email);
-            return user.Id;
+            return userSessionResponse;
         }
 
         public async Task<UserResponse> UpdateUserAsync(CreateUserRequest updateUser)

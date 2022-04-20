@@ -1,4 +1,4 @@
-﻿namespace MealPlanner.Domain.Entities.Recipes.Filters
+﻿namespace JGL.Domain.Entities.Recipes.Filters
 {
     public class RecipeFilters
     {

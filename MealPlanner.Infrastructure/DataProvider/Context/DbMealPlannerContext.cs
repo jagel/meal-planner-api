@@ -1,13 +1,13 @@
-﻿using JGL.Recipes.Domain.Entities;
-using MealPlanner.Domain.Entities.Auth;
-using MealPlanner.Domain.Infra.Localizations;
-using MealPlanner.Domain.Infra.Profile;
-using MealPlanner.Infrastructure.DataProvider.ModelBuilder;
-using MealPlanner.Infrastructure.DbSettings;
-using MealPlanner.Infrastructure.DbSettings.Extensions;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using JGL.Recipes.Domain.Entities;
+using JGL.Security.Auth.Domain.Entities;
+using JGL.Domain.Infra.Localizations;
+using JGL.Domain.Infra.Profile;
+using JGL.Infrastructure.DbSettings;
+using JGL.Infrastructure.DbSettings.Extensions;
+using JGL.Security.Auth.Infrastructure.DataProvider.ModelBuilder;
 
-namespace MealPlanner.Infrastructure.DataProvider.Context
+namespace JGL.Infrastructure.DataProvider.Context
 {
     public class DbMealPlannerContext : BaseDbContext
     {
@@ -27,7 +27,7 @@ namespace MealPlanner.Infrastructure.DataProvider.Context
 
         protected override void OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
         {
-            modelBuilder.BuilAuthdEntities();
+            modelBuilder.BuilAuthEntities();
             modelBuilder.BuildEntities();
         }
 

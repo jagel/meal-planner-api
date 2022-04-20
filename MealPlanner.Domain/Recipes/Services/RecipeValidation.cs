@@ -1,19 +1,25 @@
 ﻿using JGL.Recipes.Domain.Entities;
 using JGL.Recipes.Domain.Interfaces;
-using MealPlanner.Data.Definitions;
-using MealPlanner.Domain.Infra.Exceptions;
+using JGL.Infra.ErrorManager.Domain.Interfaces;
+using JGL.Infra.ErrorManager.Domain.Exceptions;
 
 namespace JGL.Recipes.Domain.Validations
 {
     public class RecipeValidation : IRecipeValidation
     {
+        private readonly IErrorResponseService _errorResponseService;
+
+        public RecipeValidation(IErrorResponseService errorResponseService)
+        {
+            _errorResponseService = errorResponseService;
+        }
+
         public void RecipeNotNullValidation(Recipe recipe)
         {
             if (recipe == null)
             {
-                throw new NotFoundException(
-                    new Dictionary<string, string> { { "Not found", "Recipe" } },
-                    CodeResponse.NOTFOUND_MESSAGE);
+                var errors = _errorResponseService.NotFound("Recipe");
+                throw new JGLAppException(errors);
             }
         }
     }

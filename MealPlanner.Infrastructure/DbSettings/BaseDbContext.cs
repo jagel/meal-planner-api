@@ -1,10 +1,10 @@
-﻿using MealPlanner.Domain.Entities.Globals.Interfaces;
-using MealPlanner.Domain.Infra.Localizations;
-using MealPlanner.Domain.Infra.Profile;
+﻿using JGL.Domain.Entities.Globals.Interfaces;
+using JGL.Domain.Infra.Localizations;
+using JGL.Domain.Infra.Profile;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace MealPlanner.Infrastructure.DbSettings
+namespace JGL.Infrastructure.DbSettings
 {
     public abstract class BaseDbContext : DbContext
     {

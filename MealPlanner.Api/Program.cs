@@ -1,5 +1,6 @@
-using MealPlanner.Api.DependencyInjections;
-using MealPlanner.Api.Middelwares;
+using JGL.Api.DependencyInjections;
+using JGL.Api.Middelwares;
+using JGL.Security.Auth.API.DependencyInjections;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 

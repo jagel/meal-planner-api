@@ -1,4 +1,4 @@
-﻿namespace MealPlanner.Data.Auth
+﻿namespace JGL.Security.Auth.Data.Responses
 {
     public class UserSessionResponse
     {

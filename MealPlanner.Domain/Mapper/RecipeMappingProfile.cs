@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using JGL.Recipes.Contracts.Models.Recipes;
 using JGL.Recipes.Domain.Extensions;
-using MealPlanner.Domain.Entities.Recipes.Filters;
+using JGL.Domain.Entities.Recipes.Filters;
 using RecipeEntities = JGL.Recipes.Domain.Entities;
 
 namespace JGL.Recipes.Domain.Mapper

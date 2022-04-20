@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MealPlanner.Domain
+namespace JGL.Domain
 {
     public static class Definitions
     {

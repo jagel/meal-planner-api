@@ -1,4 +1,4 @@
-﻿namespace MealPlanner.Domain.Infra.Localizations
+﻿namespace JGL.Domain.Infra.Localizations
 {
     public class Localization : ILocalization
     {

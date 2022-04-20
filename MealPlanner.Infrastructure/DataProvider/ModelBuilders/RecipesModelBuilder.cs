@@ -1,6 +1,6 @@
 ﻿using JGL.Recipes.Domain.Entities;
-using MealPlanner.Infrastructure.DbSettings.Definitions;
-using MealPlanner.Infrastructure.DbSettings.ModelBuilders;
+using JGL.Infrastructure.DbSettings.Definitions;
+using JGL.Infrastructure.DbSettings.ModelBuilders;
 
 namespace JGL.Recipes.Infrastructure.DataProvider.ModelBuilders
 {

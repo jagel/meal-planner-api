@@ -1,9 +1,10 @@
 ﻿using JGL.Globals.Api.Controllers;
+using JGL.Infra.Globals.API.Responses;
 using JGL.Recipes.Contracts.Models.Recipes;
 using JGL.Recipes.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MealPlanner.Api.Controllers
+namespace JGL.Api.Controllers
 {
     /// <summary>
     /// The main CarrierController class.
@@ -32,9 +33,9 @@ namespace MealPlanner.Api.Controllers
         /// <param name="recipeId">Recipe Id</param>
         /// <returns>Returns Recipe record by recipe Id</returns>
         [HttpGet("getRecipeById/{recipeId}", Name = "[controller].GetRecipeById")]
-        [ProducesResponseType(typeof(ModelResponse<Recipe>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ModelResponse<Recipe>), StatusCodes.Status500InternalServerError)]
-        [ProducesResponseType(typeof(ModelResponse<Recipe>), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(JGLModelResponse<Recipe>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JGLModelResponse<Recipe>), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(JGLModelResponse<Recipe>), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetRecipeById([FromRoute] int recipeId)
         {
             if (recipeId <= 0)
@@ -45,14 +46,11 @@ namespace MealPlanner.Api.Controllers
 
             var recipe = await _recipeService.GetById(recipeId);
 
-            var recipeResponse = new ModelResponse<Recipe>()
+            var recipeResponse = new JGLModelResponse<Recipe>()
             {
                 Data = recipe
             };
 
-            if (recipeResponse.HasErrors)
-                recipeResponse.ErrorResponse = ErrorResponses.InternalErrorResponse;
-           
             return new OkObjectResult(recipeResponse);
         }
 
@@ -65,8 +63,8 @@ namespace MealPlanner.Api.Controllers
         /// <param name="recipeCreate">Recipe create model</param>
         /// <returns>Returns Recipe created</returns>
         [HttpPost("createRecipe", Name = "[controller].CreateRecipe")]
-        [ProducesResponseType(typeof(ModelResponse<Recipe>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ModelResponse<Recipe>), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(JGLModelResponse<Recipe>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JGLModelResponse<Recipe>), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> CreateRecipe([FromBody] RecipeCreate recipeCreate)
         {
             if (ModelState.ErrorCount > 0)
@@ -74,7 +72,7 @@ namespace MealPlanner.Api.Controllers
 
             var recipe = await _recipeService.Create(recipeCreate);
 
-            var recipeResponse = new ModelResponse<Recipe>()
+            var recipeResponse = new JGLModelResponse<Recipe>()
             {
                 Data = recipe
             };
@@ -92,8 +90,8 @@ namespace MealPlanner.Api.Controllers
         /// <param name="recipeUpdate">Recipe create model</param>
         /// <returns>Returns Recipe updated</returns>
         [HttpPut("updateRecipe/{recipeId}", Name = "[controller].UpdateRecipe")]
-        [ProducesResponseType(typeof(ModelResponse<Recipe>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ModelResponse<Recipe>), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(JGLModelResponse<Recipe>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JGLModelResponse<Recipe>), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> UpdateRecipe([FromRoute]int recipeId ,[FromBody] RecipeUpdate recipeUpdate)
         {
             if (recipeId != recipeUpdate.RecipeId)
@@ -104,7 +102,7 @@ namespace MealPlanner.Api.Controllers
 
             var recipe = await _recipeService.Update(recipeUpdate);
 
-            var recipeResponse = new ModelResponse<Recipe>()
+            var recipeResponse = new JGLModelResponse<Recipe>()
             {
                 Data = recipe
             };

@@ -1,14 +1,9 @@
-﻿using MealPlanner.Domain.Auth.Interfaces;
-using MealPlanner.Domain.Entities.Auth;
-using MealPlanner.Infrastructure.DataProvider.Context;
+﻿using JGL.Infrastructure.DataProvider.Context;
+using JGL.Security.Auth.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using JGL.Security.Auth.Domain.Entities;
 
-namespace MealPlanner.Infrastructure.DataProvider.Repositories
+namespace JGL.Security.Auth.Infrastructure.DataProvider.Repositories
 {
     public class UserRepository : IUserRepository
     {

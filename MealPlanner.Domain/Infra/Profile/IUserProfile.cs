@@ -1,4 +1,4 @@
-﻿namespace MealPlanner.Domain.Infra.Profile
+﻿namespace JGL.Domain.Infra.Profile
 {
     public interface IUserProfile
     {

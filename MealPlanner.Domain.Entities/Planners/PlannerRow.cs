@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MealPlanner.Domain.Entities.Planners
+namespace JGL.Domain.Entities.Planners
 {
     public class PlannerRow
     {

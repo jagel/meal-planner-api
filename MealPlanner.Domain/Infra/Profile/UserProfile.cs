@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 
-namespace MealPlanner.Domain.Infra.Profile
+namespace JGL.Domain.Infra.Profile
 {
     public class UserProfile : IUserProfile
     {

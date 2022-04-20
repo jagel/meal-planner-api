@@ -1,8 +1,8 @@
 ﻿using JGL.Recipes.Domain.Mapper;
-using MealPlanner.Domain.Infra.Localizations;
-using MealPlanner.Domain.Infra.Profile;
+using JGL.Domain.Infra.Localizations;
+using JGL.Domain.Infra.Profile;
 
-namespace MealPlanner.Api.DependencyInjections
+namespace JGL.Api.DependencyInjections
 {
     internal static class StandardsApp
     {
@@ -11,7 +11,7 @@ namespace MealPlanner.Api.DependencyInjections
         {
             services.AddHttpContextAccessor();
             services.AddAutoMapper(typeof(RecipeMappingProfile));
-            services.AddAutoMapper(typeof(MealPlanner.Domain.Mapper.AuthenticationMappingProfile));
+            services.AddAutoMapper(typeof(Security.Auth.Domain.Mapper.AuthenticationMappingProfile));
             
             services.AddScoped<IUserProfile, UserProfile>();
             services.AddScoped<ILocalization, Localization>();

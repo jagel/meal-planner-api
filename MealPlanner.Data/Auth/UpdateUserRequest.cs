@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MealPlanner.Data.Auth
+namespace JGL.Security.Auth.Data.Requests
 {
     /// <summary>
     /// Recipe returns recipe model.

@@ -1,6 +1,6 @@
 ﻿
 using JGL.Recipes.Domain.Entities;
-using MealPlanner.Domain.Entities.Recipes.Filters;
+using JGL.Domain.Entities.Recipes.Filters;
 
 namespace JGL.Recipes.Domain.Interfaces
 {

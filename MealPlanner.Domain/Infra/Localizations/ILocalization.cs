@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MealPlanner.Domain.Infra.Localizations
+namespace JGL.Domain.Infra.Localizations
 {
     public interface ILocalization
     {

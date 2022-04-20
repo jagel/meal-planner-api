@@ -1,6 +1,7 @@
-﻿using MealPlanner.Data.Auth;
+﻿using JGL.Security.Auth.Data.Responses;
+using JGL.Security.Auth.Data.Requests;
 
-namespace MealPlanner.Domain.Auth.Interfaces
+namespace JGL.Security.Auth.Domain.Interfaces
 {
     public interface IUserService
     {
@@ -8,8 +9,6 @@ namespace MealPlanner.Domain.Auth.Interfaces
 
         Task<UserResponse> UpdateUserAsync(CreateUserRequest updateUser);
 
-        Task<UserResponse> GetUserByIdAsync(int userId);
-        Task<int> GetUserIdByEmailAsync(string email);
-
+        Task<UserSessionResponse> GetUserSessionByIdAsync(int userId);
     }
 }

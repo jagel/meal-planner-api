@@ -1,5 +1,5 @@
 ﻿
-namespace MealPlanner.Data.Definitions
+namespace JGL.Data.Definitions
 {
     public enum eMessageCollection
     {

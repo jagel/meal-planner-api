@@ -1,6 +1,4 @@
-﻿using MealPlanner.Data.Definitions;
-
-namespace MealPlanner.Daa.Definitions
+﻿namespace JGL.Infra.Data.Definitions
 {
     public class MessageResponse
     {
@@ -18,6 +16,7 @@ namespace MealPlanner.Daa.Definitions
         //    return text;
         //}
 
+        public static string UNAUTHORIZED = "Unauthorized";
 
         public static string ENTITYNOTFOUND = "Entity not Found.";
         public static string NOTFOUND = "Not found:";

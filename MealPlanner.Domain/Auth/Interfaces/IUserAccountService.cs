@@ -1,6 +1,7 @@
-﻿using MealPlanner.Data.Auth;
+﻿using JGL.Security.Auth.Data.Responses;
+using JGL.Security.Auth.Data.Requests;
 
-namespace MealPlanner.Domain.Auth.Interfaces
+namespace JGL.Security.Auth.Domain.Interfaces
 {
     interface IUserAccountService
     {

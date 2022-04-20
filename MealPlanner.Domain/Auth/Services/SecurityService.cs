@@ -1,10 +1,11 @@
-﻿using MealPlanner.Domain.Auth.Interfaces;
+﻿using JGL.Data.Definitions;
+using JGL.Security.Auth.Domain.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace MealPlanner.Domain.Auth.Services
+namespace JGL.Security.Auth.Domain.Services
 {
     public class SecurityService : ISecurityService
     {
@@ -34,7 +35,7 @@ namespace MealPlanner.Domain.Auth.Services
         public SigningCredentials GetSignInCredentials()
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-                _configuration.GetValue<string>("privateTokenKey")
+                _configuration.GetValue<string>(Properties.ConfigurationVariables.PrivateToken)
                 ));
 
             var credential = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

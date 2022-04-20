@@ -1,4 +1,4 @@
-﻿namespace MealPlanner.Domain.Infra.Definitions
+﻿namespace JGL.Domain.Infra.Definitions
 {
     public static class PlannerSourceCode
     {
