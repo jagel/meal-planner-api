@@ -1,6 +1,8 @@
 ﻿using JGL.Recipes.Domain.Mapper;
 using JGL.Domain.Infra.Localizations;
 using JGL.Domain.Infra.Profile;
+using JGL.Infra.ErrorManager.Domain.Services;
+using JGL.Infra.ErrorManager.Domain.Interfaces;
 
 namespace JGL.Api.DependencyInjections
 {
@@ -15,6 +17,7 @@ namespace JGL.Api.DependencyInjections
             
             services.AddScoped<IUserProfile, UserProfile>();
             services.AddScoped<ILocalization, Localization>();
+            services.AddSingleton<IErrorResponseService, ErrorResponseService>();
         }
     }
 }

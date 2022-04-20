@@ -22,6 +22,7 @@ namespace JGL.Security.Auth.API.DependencyInjections
 
             //service.AddTransient<IUserClaimsPrincipalFactory<ApplicationUser>, AuthUserClaimsPrincipalFactory>();
             service.AddScoped<IJwtService, JwtService>();
+            service.AddScoped<IAuthService, AuthService>();
 
             service.AddScoped<ISecurityService, SecurityService>();
 

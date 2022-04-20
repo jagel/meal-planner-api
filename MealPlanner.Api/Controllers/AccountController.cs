@@ -18,10 +18,13 @@ namespace JGL.Api.Controllers
         private readonly IUserService _userService;
         private readonly IJwtService _jwtService;
 
-        public AccountController(ILogger<AccountController> logger, IUserService userService)
+        public AccountController(ILogger<AccountController> logger,
+            IUserService userService,
+            IJwtService jwtService)
         {
             _logger = logger;
             _userService = userService;
+            _jwtService = jwtService;
         }
 
         [HttpGet("getUser", Name = "[controller].getUser")]
