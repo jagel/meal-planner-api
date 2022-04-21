@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace JGL.Infrastructure.DbSettings.Extensions
+namespace JGL.Infra.Globals.DbSettings.Definitions
 {
     public static class ConvertersExtension
     {

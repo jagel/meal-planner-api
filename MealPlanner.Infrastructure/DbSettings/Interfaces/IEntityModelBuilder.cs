@@ -1,4 +1,4 @@
-﻿namespace JGL.Infrastructure.DbSettings.Interfaces
+﻿namespace JGL.Infra.Globals.DbSettings.Interfaces
 {
     public interface IEntityModelBuilder
     {

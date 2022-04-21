@@ -7,7 +7,7 @@
         public const int MAXLENGTH_SHORTNAME = 50;
         public const int MAXLENGTH = 5000;
         public const int MAXLENGTH_NAME = 100;
-        public const int MAXLENGTH_ENUM = 50;
+        public const int MAXLENGTH_FRACTIONARY = 5;
 
 
         public const string TYPE_DATETIME = "DATETIME";

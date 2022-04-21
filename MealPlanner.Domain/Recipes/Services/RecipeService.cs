@@ -11,15 +11,18 @@ namespace JGL.Recipes.Domain.Services
         private readonly IRecipeRepository _recipeRepository;
         private readonly IMapper _mapper;
         private readonly IRecipeValidation _recipeValidation;
+        private readonly IRecipeProductRepository _recipeProductRepository;
 
         public RecipeService(
-            IRecipeRepository recipeRepository, 
-            IMapper mapper, 
-            IRecipeValidation recipeValidation)
+            IRecipeRepository recipeRepository,
+            IMapper mapper,
+            IRecipeValidation recipeValidation, 
+            IRecipeProductRepository recipeProductRepository)
         {
             _recipeRepository = recipeRepository;
             _mapper = mapper;
             _recipeValidation = recipeValidation;
+            _recipeProductRepository = recipeProductRepository;
         }
 
         public async Task<Recipe> Create(RecipeCreate recipeCreate)
@@ -57,6 +60,8 @@ namespace JGL.Recipes.Domain.Services
         {
             var updateRecipeEntity = _mapper.Map<RecipesEntities.Recipe>(recipeUpdate);
             updateRecipeEntity.Steps = recipeUpdate.Steps.StepsToString();
+
+            await _recipeProductRepository.DeleteAsyncByRecipeId(recipeUpdate.RecipeId);
 
             var recipeCreated = await _recipeRepository.UpdateAsync(updateRecipeEntity);
 

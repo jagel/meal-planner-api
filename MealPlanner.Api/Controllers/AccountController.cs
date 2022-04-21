@@ -27,7 +27,13 @@ namespace JGL.Api.Controllers
             _jwtService = jwtService;
         }
 
+        /// <summary>
+        /// Get user in session information
+        /// </summary>
+        /// <returns>User in session information</returns>
         [HttpGet("getUser", Name = "[controller].getUser")]
+        [ProducesResponseType(typeof(JGLModelResponse<UserSessionResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JGLModelResponse<UserSessionResponse>), StatusCodes.Status401Unauthorized)]
         [AllowAnonymous]
         public async Task<IActionResult> GetUser()
         {
@@ -56,6 +62,11 @@ namespace JGL.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Create new user
+        /// </summary>
+        /// <param name="createUserRequest">User request model</param>
+        /// <returns>User saved</returns>
         [HttpPost("createAccount", Name = "[controller].CreateAccount")]
         [ProducesResponseType(typeof(JGLModelResponse<UserResponse>), StatusCodes.Status200OK)]
         [AllowAnonymous]

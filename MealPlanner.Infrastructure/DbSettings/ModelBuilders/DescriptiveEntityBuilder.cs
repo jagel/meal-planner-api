@@ -1,16 +1,16 @@
-﻿using JGL.Infra.Domain.Entities;
-using JGL.Infrastructure.DbSettings.Definitions;
-using JGL.Infrastructure.DbSettings.Interfaces;
+﻿using JGL.Infra.Globals.DbSettings.Definitions;
+using JGL.Infra.Globals.DbSettings.Interfaces;
+using JGL.Infra.Globals.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace JGL.Infrastructure.DbSettings.ModelBuilders
+namespace JGL.Infra.Globals.DbSettings.ModelBuilders
 {
     public abstract class DescriptiveEntityBuilder<TEntity> : IEntityModelBuilder where TEntity : DescriptiveEntity, new()
     {
-        public abstract void BuildEntity(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder);
+        public abstract void BuildEntity(ModelBuilder modelBuilder);
 
-        public virtual void CreateGlobalParameters(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
+        public virtual void CreateGlobalParameters(ModelBuilder modelBuilder)
         {
             string TableName = typeof(TEntity).Name;
             string text = "PrimaryKey_" + TableName + "Id";

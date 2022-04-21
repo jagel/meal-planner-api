@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace JGL.Domain.Entities.Globals.Interfaces
+﻿namespace JGL.Infra.Globals.Domain.Entities.Interfaces
 {
     public interface IAuditEntity
     {

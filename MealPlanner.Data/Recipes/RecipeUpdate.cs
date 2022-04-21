@@ -49,5 +49,10 @@ namespace JGL.Recipes.Contracts.Models.Recipes
         /// </example>
         [MaxLength(DefinitionsValues.MAXLENGTH_DESCRIPTION, ErrorMessage = MessagesValidation.ErrorMaxLengthMessage)]
         public IEnumerable<RecipeSteps> Steps { get; set; }
+
+        /// <summary>
+        /// Products collection
+        /// </summary>
+        public IEnumerable<RecipeProductCreate> Products { get; set; }
     }
 }

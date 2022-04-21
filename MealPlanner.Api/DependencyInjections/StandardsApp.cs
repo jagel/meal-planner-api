@@ -1,6 +1,6 @@
 ﻿using JGL.Recipes.Domain.Mapper;
-using JGL.Domain.Infra.Localizations;
-using JGL.Domain.Infra.Profile;
+using JGL.Infra.Globals.API.Domain.Interfaces;
+using JGL.Infra.Globals.API.Domain.Services;
 using JGL.Infra.ErrorManager.Domain.Services;
 using JGL.Infra.ErrorManager.Domain.Interfaces;
 
@@ -15,8 +15,8 @@ namespace JGL.Api.DependencyInjections
             services.AddAutoMapper(typeof(RecipeMappingProfile));
             services.AddAutoMapper(typeof(Security.Auth.Domain.Mapper.AuthenticationMappingProfile));
             
-            services.AddScoped<IUserProfile, UserProfile>();
-            services.AddScoped<ILocalization, Localization>();
+            services.AddScoped<IUserSessionProfile, UserSessionProfile>();
+            services.AddScoped<ITimeService, TimeService>();
             services.AddSingleton<IErrorResponseService, ErrorResponseService>();
         }
     }

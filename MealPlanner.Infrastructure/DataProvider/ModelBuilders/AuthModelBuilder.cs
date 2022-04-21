@@ -1,7 +1,6 @@
-﻿using JGL.Security.Auth.Domain.Entities;
-using JGL.Infrastructure.DbSettings.Definitions;
+﻿using JGL.Infra.Globals.DbSettings.Definitions;
+using JGL.Security.Auth.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using JGL.Infrastructure.DbSettings.Extensions;
 
 namespace JGL.Security.Auth.Infrastructure.DataProvider.ModelBuilder
 {
@@ -11,7 +10,7 @@ namespace JGL.Security.Auth.Infrastructure.DataProvider.ModelBuilder
         {
             OrganizationModelBuilder(modelBuilder);
             UserModelBuilder(modelBuilder);
-            OrganizatioUSernModelBuilder(modelBuilder);
+            OrganizatioUserModelBuilder(modelBuilder);
         }
 
         private static void OrganizationModelBuilder(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
@@ -96,7 +95,7 @@ namespace JGL.Security.Auth.Infrastructure.DataProvider.ModelBuilder
 
         }
 
-        private static void OrganizatioUSernModelBuilder(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
+        private static void OrganizatioUserModelBuilder(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
         {
             string text = "PrimaryKey_OrganizationUserId";
             string TableNameId = "OrganizationUserId";

@@ -52,6 +52,11 @@ namespace JGL.Recipes.Contracts.Models.Recipes
         public IEnumerable<RecipeSteps> Steps { get; set; }
 
         /// <summary>
+        /// Products collection
+        /// </summary>
+        public IEnumerable<RecipeProduct> RecipeProducts { get; set; }
+
+        /// <summary>
         /// Created By
         /// </summary>
         /// <example>

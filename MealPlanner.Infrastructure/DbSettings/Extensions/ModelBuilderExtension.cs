@@ -1,7 +1,7 @@
-﻿using JGL.Infrastructure.DbSettings.Interfaces;
+﻿using JGL.Infra.Globals.DbSettings.Interfaces;
 using System.Reflection;
 
-namespace JGL.Infrastructure.DbSettings.Extensions
+namespace JGL.Infra.Globals.DbSettings.Extensions
 {
     public static class ModelBuilderExtension
     {
