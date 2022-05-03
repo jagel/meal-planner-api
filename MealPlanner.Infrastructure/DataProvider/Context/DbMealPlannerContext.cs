@@ -1,17 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using JGL.Recipes.Domain.Entities;
 using JGL.Security.Auth.Domain.Entities;
-using JGL.Domain.Infra.Localizations;
-using JGL.Domain.Infra.Profile;
-using JGL.Infrastructure.DbSettings;
-using JGL.Infrastructure.DbSettings.Extensions;
+using JGL.Infra.Globals.API.Domain.Interfaces;
 using JGL.Security.Auth.Infrastructure.DataProvider.ModelBuilder;
+using JGL.Infra.Globals.DbSettings.Extensions;
+using JGL.Infra.Globals.DbSettings;
 
 namespace JGL.Infrastructure.DataProvider.Context
 {
     public class DbMealPlannerContext : BaseDbContext
     {
-        public DbMealPlannerContext(DbContextOptions options, IUserProfile userProfile, ILocalization localization) : base(options, userProfile, localization)
+        public DbMealPlannerContext(DbContextOptions options, 
+            IUserSessionProfile userProfile, 
+            ITimeService timeService) : base(options, userProfile, timeService)
         {
         }
 
@@ -19,13 +20,15 @@ namespace JGL.Infrastructure.DataProvider.Context
         public DbSet<Organization> Organization { get; set; }
         public DbSet<OrganizationUser> OrganizationUser { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<UserSession> UserSession { get; set; }
 
 
         // ------------------ Recipes
         public DbSet<Recipe> Recipe { get; set; }
+        public DbSet<RecipeProduct> RecipeProduct { get; set; }
 
 
-        protected override void OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.BuilAuthEntities();
             modelBuilder.BuildEntities();

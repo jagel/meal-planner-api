@@ -1,19 +1,17 @@
-﻿using JGL.Domain.Entities.Globals.Interfaces;
-using JGL.Domain.Infra.Localizations;
-using JGL.Domain.Infra.Profile;
+﻿using JGL.Infra.Globals.API.Domain.Interfaces;
+using JGL.Infra.Globals.Domain.Entities.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-
-namespace JGL.Infrastructure.DbSettings
+namespace JGL.Infra.Globals.DbSettings
 {
     public abstract class BaseDbContext : DbContext
     {
-        private readonly IUserProfile _userProfile;
-        private readonly ILocalization _localization;
-        public BaseDbContext(DbContextOptions options, IUserProfile userProfile, ILocalization localization) : base(options)
+        private readonly IUserSessionProfile _userProfile;
+        private readonly ITimeService _timeService;
+        public BaseDbContext(DbContextOptions options, IUserSessionProfile userProfile, ITimeService timeService) : base(options)
         {
             _userProfile = userProfile;
-            _localization = localization;
+            _timeService = timeService;
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -28,8 +26,8 @@ namespace JGL.Infrastructure.DbSettings
 
             foreach (var entityEntry in createEntries)
             {
-                ((IAuditEntity)entityEntry.Entity).CreatedDate = _localization.GetDateTime();
-                ((IAuditEntity)entityEntry.Entity).CreatedBy = _userProfile.GetUserEmail();
+                ((IAuditEntity)entityEntry.Entity).CreatedDate = _timeService.GetDateTime();
+                ((IAuditEntity)entityEntry.Entity).CreatedBy = _userProfile.GetUserInSession();
             }
 
             foreach (var entityEntry in updateEntries)
@@ -37,8 +35,8 @@ namespace JGL.Infrastructure.DbSettings
                 entityEntry.Property(nameof(IAuditEntity.CreatedBy)).IsModified = false;
                 entityEntry.Property(nameof(IAuditEntity.CreatedDate)).IsModified = false;
 
-                ((IAuditEntity)entityEntry.Entity).UpdatedDate = _localization.GetDateTime();
-                ((IAuditEntity)entityEntry.Entity).UpdatedBy = _userProfile.GetUserEmail();
+                ((IAuditEntity)entityEntry.Entity).UpdatedDate = _timeService.GetDateTime();
+                ((IAuditEntity)entityEntry.Entity).UpdatedBy = _userProfile.GetUserInSession();
             }
             return base.SaveChangesAsync(cancellationToken);
         }
@@ -55,8 +53,8 @@ namespace JGL.Infrastructure.DbSettings
 
             foreach (var entityEntry in createEntries)
             {
-                ((IAuditEntity)entityEntry.Entity).CreatedDate = _localization.GetDateTime();
-                ((IAuditEntity)entityEntry.Entity).CreatedBy = _userProfile.GetUserEmail();
+                ((IAuditEntity)entityEntry.Entity).CreatedDate = _timeService.GetDateTime();
+                ((IAuditEntity)entityEntry.Entity).CreatedBy = _userProfile.GetUserInSession();
             }
 
             foreach (var entityEntry in updateEntries)
@@ -64,8 +62,8 @@ namespace JGL.Infrastructure.DbSettings
                 entityEntry.Property(nameof(IAuditEntity.CreatedBy)).IsModified = false;
                 entityEntry.Property(nameof(IAuditEntity.CreatedDate)).IsModified = false;
 
-                ((IAuditEntity)entityEntry.Entity).UpdatedDate = _localization.GetDateTime();
-                ((IAuditEntity)entityEntry.Entity).UpdatedBy = _userProfile.GetUserEmail();
+                ((IAuditEntity)entityEntry.Entity).UpdatedDate = _timeService.GetDateTime();
+                ((IAuditEntity)entityEntry.Entity).UpdatedBy = _userProfile.GetUserInSession();
             }
 
             return base.SaveChanges();

@@ -1,8 +1,8 @@
-﻿using JGL.Domain.Entities.Globals.Interfaces;
+﻿using JGL.Infra.Globals.Domain.Entities.Interfaces;
 
-namespace JGL.Infra.Domain.Entities
+namespace JGL.Infra.Globals.Domain.Entities
 {
-    public class DescriptiveEntity : IAuditEntity
+    public class DescriptiveEntity : IAuditEntity, IIdEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

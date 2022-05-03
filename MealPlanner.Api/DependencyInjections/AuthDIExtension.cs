@@ -13,6 +13,12 @@ namespace JGL.Security.Auth.API.DependencyInjections
             .AddCookie(options =>
             {
                 options.AccessDeniedPath = "/api/auth/denied";
+            })
+            .AddGoogle(options =>
+            {
+                options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.ClientId = configuration.GetValue<string>(ConfigVar.Google.ClientId);
+                options.ClientSecret = configuration.GetValue<string>(ConfigVar.Google.ClientSecret);
             });
           
         }

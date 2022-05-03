@@ -20,12 +20,19 @@ namespace JGL.Api.Middelwares
             }
             catch (JGLAppException ex)
             {
-                ex.GenerateErrorResponse();
-
+                var response = ex.GenerateErrorResponse();
+                await context.Response.WriteAsJsonAsync(response);
+            }
+            catch (Exception ex)
+            {
                 var response = new JGLModelResponse<string>
                 {
                     Data = null,
-                    ErrorResponse = ex.ErrorResponse
+                    ErrorResponse = new Infra.ErrorManager.Data.Responses.ErrorResponse 
+                    {
+                        Title = "Unhandled error",
+                        Description = ex.Message,
+                    }
                 };
 
                 await context.Response.WriteAsJsonAsync(response);

@@ -1,4 +1,6 @@
-﻿using JGL.Security.Auth.Data.Requests;
+﻿using JGL.Infra.ErrorManager.Domain.Exceptions;
+using JGL.Infra.ErrorManager.Domain.Interfaces;
+using JGL.Security.Auth.Data.Requests;
 using JGL.Security.Auth.Data.Responses;
 using JGL.Security.Auth.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -17,17 +19,26 @@ namespace JGL.Api.Controllers
         private readonly ILogger<AccountController> _logger;
         private readonly IUserService _userService;
         private readonly IJwtService _jwtService;
+        private readonly IErrorResponseService _errorResponseService;
 
         public AccountController(ILogger<AccountController> logger,
             IUserService userService,
-            IJwtService jwtService)
+            IJwtService jwtService, 
+            IErrorResponseService errorResponseService)
         {
             _logger = logger;
             _userService = userService;
             _jwtService = jwtService;
+            _errorResponseService = errorResponseService;
         }
 
+        /// <summary>
+        /// Get user in session information
+        /// </summary>
+        /// <returns>User in session information</returns>
         [HttpGet("getUser", Name = "[controller].getUser")]
+        [ProducesResponseType(typeof(JGLModelResponse<UserSessionResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JGLModelResponse<UserSessionResponse>), StatusCodes.Status401Unauthorized)]
         [AllowAnonymous]
         public async Task<IActionResult> GetUser()
         {
@@ -48,18 +59,22 @@ namespace JGL.Api.Controllers
             }
             catch
             {
-                var errorResponse = new JGLModelResponse<UserSessionResponse>
-                {
-                    ErrorResponse = new Infra.ErrorManager.Data.Responses.ErrorResponse { Title = "Unauthorized"}
-                };
-                return Unauthorized(errorResponse);
+                var errorMessages= _errorResponseService.Unauthorized();
+                var errorException = new JGLAppException(errorMessages);
+                var errorResponse = errorException.GenerateErrorResponse();
+                return Ok(errorResponse);
             }
         }
 
+        /// <summary>
+        /// Create new user
+        /// </summary>
+        /// <param name="createUserRequest">User request model</param>
+        /// <returns>User saved</returns>
+        [AllowAnonymous]
         [HttpPost("createAccount", Name = "[controller].CreateAccount")]
         [ProducesResponseType(typeof(JGLModelResponse<UserResponse>), StatusCodes.Status200OK)]
-        [AllowAnonymous]
-        public async Task<IActionResult> CreateAccount(CreateUserRequest createUserRequest)
+        public async Task<IActionResult> CreateAccount([FromBody]CreateUserRequest createUserRequest)
         {
             var userSaved = await _userService.CreateUserAsync(createUserRequest);
 

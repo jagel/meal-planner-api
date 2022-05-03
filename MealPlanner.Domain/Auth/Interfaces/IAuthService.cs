@@ -6,6 +6,7 @@ namespace JGL.Security.Auth.Domain.Interfaces
     public interface IAuthService
     {
         Task<LoginResponse> LoginAsync(UserLoginRequest userLogin);
+        Task<LoginResponse> LoginByEmailAsync(string email);
         Task LogoutAsync();
     }
 }

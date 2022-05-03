@@ -1,5 +1,5 @@
-﻿namespace JGL.Data.Definitions
-{
+﻿namespace JGL.Infra.Globals.Data.Definitions 
+{ 
     public static class Properties
     {
         public static class ConfigurationVariables

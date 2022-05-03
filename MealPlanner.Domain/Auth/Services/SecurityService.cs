@@ -1,4 +1,4 @@
-﻿using JGL.Data.Definitions;
+﻿using JGL.Infra.Globals.Data.Definitions;
 using JGL.Security.Auth.Domain.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;

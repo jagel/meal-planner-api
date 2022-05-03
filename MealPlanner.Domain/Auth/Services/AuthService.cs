@@ -20,6 +20,20 @@ namespace JGL.Security.Auth.Domain.Services
             _jwtService = jwtService;
         }
 
+        public async Task<LoginResponse> LoginByEmailAsync(string email)
+        {
+            var dbUser = await _userRepository.GetUserByEmailAsync(email);
+
+            _userSessionValidation.ValidateEntityUser(dbUser);
+            var jwt = _jwtService.GenerateToken(dbUser);
+
+            return new()
+            {
+                ClaimsPrincipal = dbUser.ToClaimsPrincipal(),
+                Jwt = jwt
+            };
+        }
+
         public async Task<LoginResponse> LoginAsync(UserLoginRequest userLogin)
         {
             var dbUser = await _userRepository.GetUserByEmailAsync(userLogin.Email);
@@ -38,7 +52,6 @@ namespace JGL.Security.Auth.Domain.Services
 
         public async Task LogoutAsync()
         {
-            
         }
     }
 }

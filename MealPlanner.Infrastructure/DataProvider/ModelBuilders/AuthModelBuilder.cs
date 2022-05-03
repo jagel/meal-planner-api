@@ -1,7 +1,6 @@
-﻿using JGL.Security.Auth.Domain.Entities;
-using JGL.Infrastructure.DbSettings.Definitions;
+﻿using JGL.Infra.Globals.DbSettings.Definitions;
+using JGL.Security.Auth.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using JGL.Infrastructure.DbSettings.Extensions;
 
 namespace JGL.Security.Auth.Infrastructure.DataProvider.ModelBuilder
 {
@@ -11,7 +10,8 @@ namespace JGL.Security.Auth.Infrastructure.DataProvider.ModelBuilder
         {
             OrganizationModelBuilder(modelBuilder);
             UserModelBuilder(modelBuilder);
-            OrganizatioUSernModelBuilder(modelBuilder);
+            OrganizatioUserModelBuilder(modelBuilder);
+            UserSessionModelBuilder(modelBuilder);
         }
 
         private static void OrganizationModelBuilder(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
@@ -79,7 +79,6 @@ namespace JGL.Security.Auth.Infrastructure.DataProvider.ModelBuilder
                     .IsRequired()
                     .HasMaxLength(DatabaseProperties.MySQL.MAXLENGTH_NAME);
 
-
                 user.Property(x => x.PasswordHash)
                     .IsRequired()
                     .IsConcurrencyToken();
@@ -91,12 +90,18 @@ namespace JGL.Security.Auth.Infrastructure.DataProvider.ModelBuilder
                 user.HasMany(o => o.OrganizationUsers)
                   .WithOne(ou => ou.User)
                   .HasForeignKey(ou => ou.UserId);
+
+                user.Property(x => x.Language)
+                  .IsRequired()
+                  .HasMaxLength(DatabaseProperties.MySQL.MAXLENGTH_FRACTIONARY);
+
+                user.HasMany(u => u.UserSessions).WithOne().HasForeignKey(user => user.UserId);
             });
 
 
         }
 
-        private static void OrganizatioUSernModelBuilder(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
+        private static void OrganizatioUserModelBuilder(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
         {
             string text = "PrimaryKey_OrganizationUserId";
             string TableNameId = "OrganizationUserId";
@@ -124,6 +129,38 @@ namespace JGL.Security.Auth.Infrastructure.DataProvider.ModelBuilder
 
 
         }
+
+        private static void UserSessionModelBuilder(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
+        {
+            string text = "PrimaryKey_UerId";
+            string TableNameId = "UserId";
+
+            modelBuilder.Entity<UserSession>(userSession =>
+            {
+                userSession.Property(x => x.Id)
+                    .HasColumnName(TableNameId)
+                    .HasComment("User PK: UserId");
+
+                userSession.HasKey(x => x.Id)
+                    .HasName(TableNameId);
+
+                userSession.Property(x => x.AuthScheme)
+                    .IsRequired()
+                    .HasMaxLength(DatabaseProperties.MySQL.MAXLENGTH_ENUM);
+
+                userSession.Property(x => x.JWT)
+                     .IsRequired()
+                     .HasMaxLength(DatabaseProperties.MySQL.MAXLENGTH_DESCRIPTION);
+
+                userSession.Property(x => x.CreatedDate)
+                    .IsRequired();
+
+                userSession.Property(x => x.EndDate)
+                    .IsRequired();              
+
+            });
+        }
+
 
     }
 }

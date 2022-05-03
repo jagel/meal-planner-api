@@ -2,10 +2,10 @@
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using JGL.Data.Definitions;
 using JGL.Security.Auth.Domain.Interfaces;
 using JGL.Security.Auth.Domain.Entities;
 using JGL.Security.Auth.Domain.Extensions;
+using JGL.Infra.Globals.Data.Definitions;
 
 namespace JGL.Security.Auth.Domain.Services
 {

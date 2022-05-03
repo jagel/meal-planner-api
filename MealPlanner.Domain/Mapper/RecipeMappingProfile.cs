@@ -24,6 +24,13 @@ namespace JGL.Recipes.Domain.Mapper
                 .ForMember(dest => dest.Steps, from => from.MapFrom(src => src.Steps.StepsToString()))
                 .ReverseMap();
 
+            CreateMap<RecipeEntities.RecipeProduct, RecipeProduct>()
+              .ForMember(dest => dest.RecipeProductId, from => from.MapFrom(src => src.Id))
+              .ReverseMap();
+
+            CreateMap<RecipeProductCreate, RecipeProduct>()
+             .ReverseMap();
+
             CreateMap<RecipeSearch, RecipeFilters>()
                 .ReverseMap();
 

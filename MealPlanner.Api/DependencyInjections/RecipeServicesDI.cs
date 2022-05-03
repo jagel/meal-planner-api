@@ -5,7 +5,7 @@ using JGL.Recipes.Domain.Validations;
 
 namespace JGL.Api.DependencyInjections
 {
-    public static class ReciipeServicesDI
+    public static class RecipeServicesDI
     {
         public static void AddRecipeServices(this IServiceCollection services)
         {
@@ -13,8 +13,9 @@ namespace JGL.Api.DependencyInjections
 
             services.AddTransient<IRecipeService, RecipeService>();
             services.AddTransient<IRecipeSearchService, RecipeSearchService>();
-
+            
             services.AddTransient<IRecipeRepository, RecipeRepository>();
+            services.AddTransient<IRecipeProductRepository, RecipeProductRepository>();
 
         }
     }

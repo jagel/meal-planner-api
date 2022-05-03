@@ -1,5 +1,4 @@
 ﻿using JGL.Globals.Api.Controllers;
-using JGL.Infra.Globals.API.Responses;
 using JGL.Recipes.Contracts.Models.Recipes;
 using JGL.Recipes.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
