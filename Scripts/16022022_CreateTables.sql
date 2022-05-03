@@ -33,7 +33,7 @@ CREATE TABLE `RecipeProduct` (
     `Name`                  VARCHAR(100)    NOT NULL,
     `Amount`                INTEGER         NOT NULL,
     `Fractionary`           VARCHAR(5),
-    `MeasureType`           VARCHAR(100)     NOT NULL,
+    `MeasureType`           VARCHAR(100)    NOT NULL,
     `RecipeId`              INTEGER         NOT NULL,
 
     CONSTRAINT `PK_RecipeProduct` PRIMARY KEY (`RecipeProductId`)

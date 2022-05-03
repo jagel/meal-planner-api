@@ -17,7 +17,7 @@ namespace JGL.Api.DependencyInjections
             
             services.AddScoped<IUserSessionProfile, UserSessionProfile>();
             services.AddScoped<ITimeService, TimeService>();
-            services.AddSingleton<IErrorResponseService, ErrorResponseService>();
+            services.AddScoped<IErrorResponseService, ErrorResponseService>();
         }
     }
 }

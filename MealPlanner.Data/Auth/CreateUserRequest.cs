@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using JGL.Globals.Contracts.Validations;
+using MealPlanner.Data.Auth.CustomValidations;
+using MealPlanner.Data.Auth.Definitions;
+using System.ComponentModel.DataAnnotations;
 
 namespace JGL.Security.Auth.Data.Requests
 {
@@ -13,7 +16,7 @@ namespace JGL.Security.Auth.Data.Requests
         /// <example>
         /// mail@examplle.com
         /// </example>
-        [Required]
+        [Required(ErrorMessage = MessagesValidation.ErrorRequiredMessage)]
         public string Email { get; set; }
 
         /// <summary>
@@ -22,7 +25,7 @@ namespace JGL.Security.Auth.Data.Requests
         /// <example>
         /// jagel
         /// </example>
-        [Required]
+        [Required(ErrorMessage = MessagesValidation.ErrorRequiredMessage)]
         public string Username { get; set; }
 
 
@@ -32,7 +35,7 @@ namespace JGL.Security.Auth.Data.Requests
         /// <example>
         /// Javier
         /// </example>
-        [Required]
+        [Required(ErrorMessage = MessagesValidation.ErrorRequiredMessage)]
         public string Name { get; set; }
 
 
@@ -42,7 +45,7 @@ namespace JGL.Security.Auth.Data.Requests
         /// <example>
         /// Garcia
         /// </example>
-        [Required]
+        [Required(ErrorMessage = MessagesValidation.ErrorRequiredMessage)]
         public string Lastname { get; set; }
 
 
@@ -52,7 +55,16 @@ namespace JGL.Security.Auth.Data.Requests
         /// <example>
         /// 12345678
         /// </example>
-        [Required]
+        [Required(ErrorMessage = MessagesValidation.ErrorRequiredMessage)]
         public string Password { get; set; }
+
+        /// <summary>
+        /// Language
+        /// </summary>
+        /// <example>
+        /// es, en
+        /// </example>
+        [LanguageTypeValidation]
+        public string Language { get; set; }
     }
 }

@@ -1,5 +1,5 @@
-﻿using JGL.Infra.ErrorManager.Data.Definitions;
-using JGL.Infra.ErrorManager.Data.Responses;
+﻿using JGL.Infra.ErrorManager.Data.Responses;
+using JGL.Infra.Globals.API.Definitions;
 
 namespace JGL.Infra.Globals.API.Responses
 {
@@ -22,7 +22,7 @@ namespace JGL.Infra.Globals.API.Responses
         /// <example>
         /// 200
         /// </example>
-        public Int16 Code { get; set; } = ApiCodesResponse.Success;
+        public string Code { get; set; } = CodeResponse.SUCCESSS;
 
         /// <summary>
         /// Catch error information in case the request could did not finished

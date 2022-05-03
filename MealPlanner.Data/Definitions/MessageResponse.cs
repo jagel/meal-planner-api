@@ -1,21 +1,7 @@
-﻿namespace JGL.Infra.Data.Definitions
+﻿namespace JGL.Infra.Globals.Data.Definitions
 {
     public class MessageResponse
     {
-
-        //public static string GETNOTFOUNDMESSAGE(string lang = AppLanguage.English)
-        //{
-        //    string text = "";
-
-        //    switch (lang)
-        //    {
-        //        case AppLanguage.English: text = "Item not found."; break;
-        //        case AppLanguage.Spanish: text = "Elemento no encontrado."; break;
-        //        default: text = "Item not found."; break;
-        //    }
-        //    return text;
-        //}
-
         public static string UNAUTHORIZED = "Unauthorized";
 
         public static string ENTITYNOTFOUND = "Entity not Found.";

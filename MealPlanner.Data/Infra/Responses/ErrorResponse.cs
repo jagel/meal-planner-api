@@ -1,4 +1,4 @@
-﻿using JGL.Infra.ErrorManager.Data.Definitions;
+﻿using JGL.Infra.Globals.Data.Definitions;
 
 namespace JGL.Infra.ErrorManager.Data.Responses
 {
@@ -29,7 +29,7 @@ namespace JGL.Infra.ErrorManager.Data.Responses
         /// <example>
         /// 1
         /// </example>
-        public EErrorMessageSource MessageType { get; set; }
+        public EMessageDisplay MessageType { get; set; }
 
         /// <summary>
         /// Error collection items

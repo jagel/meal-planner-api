@@ -1,6 +1,5 @@
 ﻿using JGL.Security.Auth.Domain.Interfaces;
 using JGL.Infra.ErrorManager.Domain.Interfaces;
-using JGL.Infra.ErrorManager.Data.Definitions;
 using JGL.Infra.ErrorManager.Domain.Exceptions;
 
 namespace JGL.Security.Auth.Domain.Services
@@ -25,7 +24,7 @@ namespace JGL.Security.Auth.Domain.Services
             var userCreated = await _userRepository.GetUserByEmailAsync(email);
             if (userCreated != null)
             {
-                var errorResponse = _errorResponseService.Duplicated("Email", EErrorMessageSource.Database);
+                var errorResponse = _errorResponseService.Duplicated("Users", "Email", email);
                 throw new JGLAppException(errorResponse);
             }
         }

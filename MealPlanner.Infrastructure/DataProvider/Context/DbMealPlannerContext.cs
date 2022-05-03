@@ -20,6 +20,7 @@ namespace JGL.Infrastructure.DataProvider.Context
         public DbSet<Organization> Organization { get; set; }
         public DbSet<OrganizationUser> OrganizationUser { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<UserSession> UserSession { get; set; }
 
 
         // ------------------ Recipes

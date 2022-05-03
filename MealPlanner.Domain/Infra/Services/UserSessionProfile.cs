@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using JGL.Infra.Globals.API.Domain.Interfaces;
+using MealPlanner.Data.Auth.Definitions;
 
 namespace JGL.Infra.Globals.API.Domain.Services
 {
@@ -27,6 +28,14 @@ namespace JGL.Infra.Globals.API.Domain.Services
               .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
             var nameId = nameIdentifier?.Value??"";
             return nameId;
+        }
+
+        public ELanguageType GetUserLanguage()
+        {
+            var language = _context.HttpContext.User.Claims
+            .FirstOrDefault(x => x.Type == ClaimTypes.Locality);
+            Enum.TryParse(language?.Value ?? "", true, out ELanguageType languageType);
+            return languageType;
         }
     }
 }

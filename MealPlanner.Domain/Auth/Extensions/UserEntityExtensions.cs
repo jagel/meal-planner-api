@@ -1,4 +1,5 @@
-﻿using JGL.Security.Auth.Domain.Entities;
+﻿using JGL.Infra.Globals.Data.Definitions;
+using JGL.Security.Auth.Domain.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 
@@ -10,7 +11,8 @@ namespace JGL.Security.Auth.Domain.Extensions
             => new()
             {
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(JglClaims.Language, user.Language)
             };
 
         public static ClaimsPrincipal ToClaimsPrincipal(this User user)

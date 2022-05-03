@@ -7,9 +7,11 @@
         public string Username { get; set; }
         public string Name { get; set; }
         public string Lastname { get; set; }
+        public string Language { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
 
         public virtual IEnumerable<OrganizationUser>? OrganizationUsers { get; set; }
+        public virtual IEnumerable<UserSession>? UserSessions{ get; set; }
     }
 }

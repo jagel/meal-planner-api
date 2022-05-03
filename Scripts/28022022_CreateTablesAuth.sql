@@ -20,11 +20,27 @@ CREATE TABLE `User` (
     `LastName`      VARCHAR(100)    NULL,
     `PasswordHash`  BLOB            NOT NULL,
     `PasswordSalt`  BLOB            NOT NULL,
+    `Language`      VARCHAR(5),
 
     CONSTRAINT `PK_User`        PRIMARY KEY (`UserId`),
     CONSTRAINT `TUC_User_email` UNIQUE      (`UserId`, `Email`)
 );
 
+# ---------------------------------------------------------------------- #
+# Add table "UserSession"                                               #
+# ---------------------------------------------------------------------- #
+CREATE TABLE `UserSession` (
+    `UserSessionId` INTEGER NOT NULL AUTO_INCREMENT,
+    `AuthScheme` VARCHAR(50),
+    `JWT` VARCHAR(250),
+    `CreatedDate` DATETIME,
+    `EndDate` DATETIME,
+    `UserId` INTEGER,
+    CONSTRAINT `PK_UserSession` PRIMARY KEY (`UserSessionId`)
+);
+
+ALTER TABLE `UserSession` ADD CONSTRAINT `User_UserSession` 
+    FOREIGN KEY (`UserId`) REFERENCES `User` (`UserId`);
 
 # ---------------------------------------------------------------------- #
 # Add table "Organization"                                               #
