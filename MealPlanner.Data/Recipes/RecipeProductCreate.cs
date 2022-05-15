@@ -25,7 +25,7 @@ namespace JGL.Recipes.Contracts.Models.Recipes
         /// <example>
         /// 1
         /// </example>
-        public int Amount { get; set; }
+        public int Quantity { get; set; }
 
         /// <summary>
         /// Fractionary value
@@ -33,7 +33,7 @@ namespace JGL.Recipes.Contracts.Models.Recipes
         /// <example>
         /// 1/2
         /// </example>
-        //[MaxLength(DefinitionsValues.MAXLENGTH_FRACTIONARY, ErrorMessage = MessagesValidation.ErrorMaxLengthMessage)]
+        [MaxLength(DefinitionsValues.MAXLENGTH_FRACTIONARY, ErrorMessage = MessagesValidation.ErrorMaxLengthMessage)]
         public string Fractionary { get; set; }
 
         /// <summary>
@@ -42,6 +42,7 @@ namespace JGL.Recipes.Contracts.Models.Recipes
         /// <example>
         /// Cups
         /// </example>
+        [MaxLength(DefinitionsValues.MAXLENGTH_FRACTIONARY, ErrorMessage = MessagesValidation.ErrorMaxLengthMessage)]
         public string MeasureType { get; set; }
     }
 }

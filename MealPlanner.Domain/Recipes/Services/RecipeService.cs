@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using JGL.Recipes.Contracts.Models.Recipes;
 using RecipesEntities = JGL.Recipes.Domain.Entities;
+using RecipesEntitiesFilters = JGL.Recipes.Domain.Entities.Filters;
 using JGL.Recipes.Domain.Extensions;
 using JGL.Recipes.Domain.Interfaces;
 
@@ -46,10 +47,12 @@ namespace JGL.Recipes.Domain.Services
             return recipeDeleted;
         }
 
-        public async Task<Recipe> GetById(int recipeId)
+        public async Task<Recipe> GetById(int recipeId, RecipeFilters recipeFilters)
         {
-            var recipe = await _recipeRepository.GetByIdAsync(recipeId);
+            var filters = _mapper.Map<RecipesEntitiesFilters.RecipeFilter>(recipeFilters);
             
+            var recipe = await _recipeRepository.GetByIdAsync(recipeId, filters);
+
             _recipeValidation.RecipeNotNullValidation(recipe);
 
             var recipeResponse = _mapper.Map<Recipe>(recipe);
@@ -61,7 +64,7 @@ namespace JGL.Recipes.Domain.Services
             var updateRecipeEntity = _mapper.Map<RecipesEntities.Recipe>(recipeUpdate);
             updateRecipeEntity.Steps = recipeUpdate.Steps.StepsToString();
 
-            await _recipeProductRepository.DeleteAsyncByRecipeId(recipeUpdate.RecipeId);
+            await _recipeProductRepository.DeleteByRecipeIdAsync(recipeUpdate.RecipeId);
 
             var recipeCreated = await _recipeRepository.UpdateAsync(updateRecipeEntity);
 

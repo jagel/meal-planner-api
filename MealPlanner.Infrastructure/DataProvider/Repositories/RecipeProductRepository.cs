@@ -13,7 +13,7 @@ namespace JGL.Recipes.Infrastructure.DataProvider.Repositories
             _context = context;
         }
 
-        public async Task<(bool,int)> DeleteAsyncByRecipeId(int RecipeId)
+        public async Task<(bool,int)> DeleteByRecipeIdAsync(int RecipeId)
         {
             var recipeProducts = _context.Set<RecipeProduct>().Where(x => x.RecipeId == RecipeId);
 

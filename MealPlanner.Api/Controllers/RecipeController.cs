@@ -30,12 +30,13 @@ namespace JGL.Api.Controllers
         /// This endpoint will retreive a recipe row filtered by configuration Id
         /// </remarks>
         /// <param name="recipeId">Recipe Id</param>
+        /// <param name="RecipeFilters">Recipe filters</param>
         /// <returns>Returns Recipe record by recipe Id</returns>
         [HttpGet("getRecipeById/{recipeId}", Name = "[controller].GetRecipeById")]
         [ProducesResponseType(typeof(JGLModelResponse<Recipe>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(JGLModelResponse<Recipe>), StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(typeof(JGLModelResponse<Recipe>), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetRecipeById([FromRoute] int recipeId)
+        public async Task<IActionResult> GetRecipeById([FromRoute] int recipeId, [FromQuery] RecipeFilters filters)
         {
             if (recipeId <= 0)
                 ModelState.AddModelError("recipeId", "recipe id invalid");
@@ -43,7 +44,7 @@ namespace JGL.Api.Controllers
             if (ModelState.ErrorCount > 0)
                 return BadRequest(ModelState);
 
-            var recipe = await _recipeService.GetById(recipeId);
+            var recipe = await _recipeService.GetById(recipeId, filters);
 
             var recipeResponse = new JGLModelResponse<Recipe>()
             {

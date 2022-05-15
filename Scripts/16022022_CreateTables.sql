@@ -15,8 +15,8 @@
 CREATE TABLE `Recipe` (
     `RecipeId`      INTEGER         NOT NULL AUTO_INCREMENT,
     `Name`          VARCHAR(100)    NOT NULL,
-    `Description`   VARCHAR(250),
-    `Steps`         VARCHAR(5000),
+    `Description`   VARCHAR(250)    NULL,
+    `Steps`         VARCHAR(5000)   NULL,
     `CreatedBy`     VARCHAR(50)     NOT NULL,
     `CreatedDate`   DATETIME        NOT NULL,
     `UpdatedBy`     VARCHAR(50),
@@ -31,8 +31,8 @@ CREATE TABLE `Recipe` (
 CREATE TABLE `RecipeProduct` (
     `RecipeProductId`       INTEGER         NOT NULL AUTO_INCREMENT,
     `Name`                  VARCHAR(100)    NOT NULL,
-    `Amount`                INTEGER         NOT NULL,
-    `Fractionary`           VARCHAR(5),
+    `Quantity`                INTEGER         NULL,
+    `Fractionary`           VARCHAR(5)      NULL,
     `MeasureType`           VARCHAR(100)    NOT NULL,
     `RecipeId`              INTEGER         NOT NULL,
 

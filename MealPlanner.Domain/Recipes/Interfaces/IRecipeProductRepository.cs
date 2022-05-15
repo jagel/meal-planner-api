@@ -5,6 +5,6 @@ namespace JGL.Recipes.Domain.Interfaces
 {
     public interface IRecipeProductRepository
     {
-        public Task<(bool, int)> DeleteAsyncByRecipeId(int RecipeId);
+        public Task<(bool, int)> DeleteByRecipeIdAsync(int RecipeId);
     }
 }

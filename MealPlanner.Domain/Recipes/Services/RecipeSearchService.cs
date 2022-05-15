@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using JGL.Recipes.Contracts.Models.Recipes;
 using JGL.Recipes.Domain.Interfaces;
-using JGL.Domain.Entities.Recipes.Filters;
+using EntitiesFilter = JGL.Recipes.Domain.Entities.Filters;
 
 namespace JGL.Recipes.Domain.Services
 {
@@ -20,7 +20,7 @@ namespace JGL.Recipes.Domain.Services
 
         public async Task<IEnumerable<Recipe>> SearchAsync(RecipeSearch recipeSearchParams)
         {
-            var recipeFilters = _mapper.Map<RecipeFilters>(recipeSearchParams);
+            var recipeFilters = _mapper.Map<EntitiesFilter.RecipeSearch>(recipeSearchParams);
 
             var recipes = await _recipeRepository.GetByParamsAsync(recipeFilters);
 

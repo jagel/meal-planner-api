@@ -1,6 +1,6 @@
 ﻿using JGL.Recipes.Domain.Entities;
 using JGL.Recipes.Domain.Interfaces;
-using JGL.Domain.Entities.Recipes.Filters;
+using JGL.Recipes.Domain.Entities.Filters;
 using JGL.Infrastructure.DataProvider.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -33,17 +33,31 @@ namespace JGL.Recipes.Infrastructure.DataProvider.Repositories
             return removedCount>0;
         }
 
-        public async Task<Recipe> GetByIdAsync(int RecipeId)
+        public async Task<Recipe> GetByIdAsync(int RecipeId, RecipeFilter recipeFilters = null)
         {
-            var recipe = await _context.Set<Recipe>()
-                .Where(x => x.Id == RecipeId)
-                .AsNoTracking()
-                .FirstOrDefaultAsync();
+            Recipe? recipe = null;
+           
+            if (recipeFilters?.IncludeProducts == true)
+            {
+                recipe = await _context.Set<Recipe>()
+                    .Where(x => x.Id == RecipeId)
+                    .Include(x=>x.RecipeProducts)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync();
+            }
+            else
+            {
+                recipe = await _context.Set<Recipe>()
+                   .Where(x => x.Id == RecipeId)
+                   .AsNoTracking()
+                   .FirstOrDefaultAsync();
+            }
+       
 
-            return recipe;
+            return recipe??new Recipe();
         }
 
-        public async Task<IEnumerable<Recipe>> GetByParamsAsync(RecipeFilters recipeFilters)
+        public async Task<IEnumerable<Recipe>> GetByParamsAsync(RecipeSearch recipeFilters)
         {
             var query = from u in _context.Set<Recipe>() select u;
             //var predicate = PredicateBuilder.False<Recipe>();

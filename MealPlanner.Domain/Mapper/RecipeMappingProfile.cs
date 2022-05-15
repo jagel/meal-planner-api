@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using JGL.Recipes.Contracts.Models.Recipes;
 using JGL.Recipes.Domain.Extensions;
-using JGL.Domain.Entities.Recipes.Filters;
 using RecipeEntities = JGL.Recipes.Domain.Entities;
+using RecipeEntitiesFilter = JGL.Recipes.Domain.Entities.Filters;
 
 namespace JGL.Recipes.Domain.Mapper
 {
@@ -28,12 +28,15 @@ namespace JGL.Recipes.Domain.Mapper
               .ForMember(dest => dest.RecipeProductId, from => from.MapFrom(src => src.Id))
               .ReverseMap();
 
-            CreateMap<RecipeProductCreate, RecipeProduct>()
+            CreateMap<RecipeProductCreate, RecipeEntities.RecipeProduct>()
              .ReverseMap();
 
-            CreateMap<RecipeSearch, RecipeFilters>()
+            CreateMap<RecipeSearch, RecipeEntitiesFilter.RecipeSearch>()
                 .ReverseMap();
 
+            CreateMap<RecipeFilters, RecipeEntitiesFilter.RecipeFilter>()
+                .ReverseMap();
+            
         }
     }
 }
