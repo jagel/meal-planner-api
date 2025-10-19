@@ -1,9 +1,9 @@
 ﻿namespace JGL.Infra.Globals.DbSettings.Interfaces
 {
-    public interface IEntityModelBuilder
+    public interface IEntityModelBuilder<TModelBuilder>
     {
-        void BuildEntity(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder);
+        void BuildEntity(TModelBuilder modelBuilder);
 
-        void CreateGlobalParameters(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder);
+        void CreateGlobalParameters(TModelBuilder modelBuilder);
     }
 }

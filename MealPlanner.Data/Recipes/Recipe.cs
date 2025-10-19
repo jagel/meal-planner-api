@@ -35,7 +35,7 @@ namespace JGL.Recipes.Contracts.Models.Recipes
         /// Description
         /// </example>
         [MaxLength(DefinitionsValues.MAXLENGTH_DESCRIPTION, ErrorMessage = MessagesValidation.ErrorMaxLengthMessage)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// Recipe Steps collection

@@ -7,16 +7,8 @@ namespace JGL.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class PlannerController : BaseController
+    public class PlannerController(ILogger<PlannerController> _logger) : BaseController
     {
-        private readonly ILogger<PlannerController> _logger;
-
-        public PlannerController(ILogger<PlannerController> logger)
-        {
-            _logger = logger;
-        }
-
-
         [HttpGet("GetTableMetadata")]
         public IActionResult GetTableMetadata()
         {

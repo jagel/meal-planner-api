@@ -12,17 +12,12 @@ namespace JGL.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Produces("application/json")]
-    public class RecipeController : BaseController
+    public class RecipeController(
+        ILogger<RecipeController> logger,
+        IRecipeService recipeService
+        ) : BaseController
     {
-        private readonly ILogger<RecipeController> _logger;
-        private readonly IRecipeService _recipeService;
-
-        public RecipeController(ILogger<RecipeController> logger, IRecipeService recipeService)
-        {
-            _logger = logger;
-            _recipeService = recipeService;
-        }
-
+        
         /// <summary>
         /// Get recipe record by Id.
         /// </summary>
@@ -44,7 +39,7 @@ namespace JGL.Api.Controllers
             if (ModelState.ErrorCount > 0)
                 return BadRequest(ModelState);
 
-            var recipe = await _recipeService.GetById(recipeId, filters);
+            var recipe = await recipeService.GetById(recipeId, filters);
 
             var recipeResponse = new JGLModelResponse<Recipe>()
             {
@@ -70,7 +65,7 @@ namespace JGL.Api.Controllers
             if (ModelState.ErrorCount > 0)
                 return BadRequest(ModelState);
 
-            var recipe = await _recipeService.Create(recipeCreate);
+            var recipe = await recipeService.Create(recipeCreate);
 
             var recipeResponse = new JGLModelResponse<Recipe>()
             {
@@ -100,7 +95,7 @@ namespace JGL.Api.Controllers
             if (ModelState.ErrorCount > 0)
                 return BadRequest(ModelState);
 
-            var recipe = await _recipeService.Update(recipeUpdate);
+            var recipe = await recipeService.Update(recipeUpdate);
 
             var recipeResponse = new JGLModelResponse<Recipe>()
             {

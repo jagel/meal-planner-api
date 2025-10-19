@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using JGL.Security.Auth.Domain.Interfaces;
+﻿using JGL.Security.Auth.Domain.Interfaces;
 using JGL.Security.Auth.Domain.Entities;
 using JGL.Security.Auth.Data.Requests;
 using JGL.Security.Auth.Data.Responses;
@@ -8,19 +7,16 @@ namespace JGL.Security.Auth.Domain.Services
 {
     public class UserAccountService : IUserAccountService
     {
-        private readonly IMapper _mapper;
         private readonly IOrganizationService _organizationService;
         private readonly IOrganizationUserRepository _organizationUserRepository;
         private readonly IUserService _userService;
 
         public UserAccountService(IOrganizationService organizationService,
                            IOrganizationUserRepository organizationUserRepository,
-                           IMapper mapper, 
                            IUserService userService)
         {
             _organizationService = organizationService;
             _organizationUserRepository = organizationUserRepository;
-            _mapper = mapper;
             _userService = userService;
         }
 
@@ -33,7 +29,15 @@ namespace JGL.Security.Auth.Domain.Services
 
             var organizationUser = await _organizationUserRepository.CreateOrganizationUserAsync(new OrganizationUser { OrganizationId = organization.Id, UserId = user.UserId, UserStatus = EUserStatus.Active });
 
-            var response = _mapper.Map<UserResponse>(user);
+
+            var response = new UserResponse
+            {
+                Email = user.Email,
+                Lastname = user.Lastname,
+                Name = user.Name,
+                UserId = user.UserId,
+                Username = user.Username
+            };
 
             return response;
         }

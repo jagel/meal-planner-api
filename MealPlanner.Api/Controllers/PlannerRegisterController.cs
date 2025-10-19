@@ -7,14 +7,8 @@ namespace JGL.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class PlannerRegisterController : BaseController
+    public class PlannerRegisterController(ILogger<PlannerRegisterController> logger) : BaseController
     {
-        private readonly ILogger<PlannerRegisterController> _logger;
-        public PlannerRegisterController(ILogger<PlannerRegisterController> logger)
-        {
-            _logger = logger;
-        }
-
         [HttpGet("getPlannerRegisterPerDay/{day}", Name = "[controller].GetPlannerRegisterPerDay")]
         public IActionResult GetPlannerRegisterPerDay([FromRoute] DateTime day)
         {

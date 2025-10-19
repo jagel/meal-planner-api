@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JGL.Infra.Globals.DbSettings.ModelBuilders
 {
-    public abstract class IdentifierEntityBuilder<TEntity> : IEntityModelBuilder where TEntity : IdentifierEntity, new()
+    public abstract class IdentifierEntityBuilder<TEntity> : IEntityModelBuilder<ModelBuilder> where TEntity : IdentifierEntity, new()
     {
         public abstract void BuildEntity(ModelBuilder modelBuilder);
 

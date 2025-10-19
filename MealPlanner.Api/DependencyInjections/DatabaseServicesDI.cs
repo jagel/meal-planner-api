@@ -9,7 +9,7 @@ namespace JGL.Api.DependencyInjections
         {
             //TODO: create ConfigurationProvider
             var dbConnectionStr = configuration.GetValue<string>(ConfigVar.DatabaseConnecion);
-            services.AddDbContext<DbMealPlannerContext>(options => options.UseMySql(dbConnectionStr, ServerVersion.AutoDetect(dbConnectionStr)));
+            services.AddDbContext<DbMealPlannerContext>(options => options.UseSqlServer(dbConnectionStr));
         }
     }
 }
