@@ -1,6 +1,6 @@
 ﻿
 using JGL.Recipes.Domain.Entities;
-using JGL.Domain.Entities.Recipes.Filters;
+using JGL.Recipes.Domain.Entities.Filters;
 
 namespace JGL.Recipes.Domain.Interfaces
 {
@@ -10,9 +10,9 @@ namespace JGL.Recipes.Domain.Interfaces
 
         public Task<Recipe> UpdateAsync(Recipe recipeUpdate);
 
-        public Task<Recipe> GetByIdAsync(int RecipeId);
+        public Task<Recipe> GetByIdAsync(int RecipeId, RecipeFilter recipeFilters = null);
 
-        public Task<IEnumerable<Recipe>> GetByParamsAsync(RecipeFilters recipeFilters);
+        public Task<IEnumerable<Recipe>> GetByParamsAsync(RecipeSearch recipeSearch);
 
         public Task<bool> DeleteAsync(Recipe recipeDelete);
     }

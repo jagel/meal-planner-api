@@ -14,24 +14,13 @@ namespace JGL.Api.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : ControllerBase
+    public class AccountController(
+        ILogger<AccountController> logger,
+        IUserService userService,
+        IJwtService jwtService,
+        IErrorResponseService errorResponseService
+    ) : ControllerBase
     {
-        private readonly ILogger<AccountController> _logger;
-        private readonly IUserService _userService;
-        private readonly IJwtService _jwtService;
-        private readonly IErrorResponseService _errorResponseService;
-
-        public AccountController(ILogger<AccountController> logger,
-            IUserService userService,
-            IJwtService jwtService, 
-            IErrorResponseService errorResponseService)
-        {
-            _logger = logger;
-            _userService = userService;
-            _jwtService = jwtService;
-            _errorResponseService = errorResponseService;
-        }
-
         /// <summary>
         /// Get user in session information
         /// </summary>
@@ -45,10 +34,10 @@ namespace JGL.Api.Controllers
             try
             {
                 var jwt = Request.Cookies[ConfigVar.TokenCookie];
-                var token = _jwtService.VerifyToken(jwt);
+                var token = jwtService.VerifyToken(jwt);
                 int userId = int.Parse(token.Issuer);
 
-                var userSession = await _userService.GetUserSessionByIdAsync(userId);
+                var userSession = await userService.GetUserSessionByIdAsync(userId);
 
                 var response = new JGLModelResponse<UserSessionResponse>
                 {
@@ -59,7 +48,7 @@ namespace JGL.Api.Controllers
             }
             catch
             {
-                var errorMessages= _errorResponseService.Unauthorized();
+                var errorMessages = errorResponseService.Unauthorized();
                 var errorException = new JGLAppException(errorMessages);
                 var errorResponse = errorException.GenerateErrorResponse();
                 return Ok(errorResponse);
@@ -74,9 +63,9 @@ namespace JGL.Api.Controllers
         [AllowAnonymous]
         [HttpPost("createAccount", Name = "[controller].CreateAccount")]
         [ProducesResponseType(typeof(JGLModelResponse<UserResponse>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> CreateAccount([FromBody]CreateUserRequest createUserRequest)
+        public async Task<IActionResult> CreateAccount([FromBody] CreateUserRequest createUserRequest)
         {
-            var userSaved = await _userService.CreateUserAsync(createUserRequest);
+            var userSaved = await userService.CreateUserAsync(createUserRequest);
 
             var respone = new JGLModelResponse<UserResponse>
             {
@@ -86,12 +75,10 @@ namespace JGL.Api.Controllers
             return Ok(respone);
         }
 
-
         [HttpPost("changePassword")]
         public IActionResult ChangePassword()
         {
             return Ok();
         }
-
     }
 }

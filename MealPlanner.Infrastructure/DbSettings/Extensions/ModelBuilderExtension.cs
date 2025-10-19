@@ -7,13 +7,13 @@ namespace JGL.Infra.Globals.DbSettings.Extensions
     {
         public static void BuildEntities(this Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
         {
-            Type typeFromHandle = typeof(IEntityModelBuilder);
+            Type typeFromHandle = typeof(IEntityModelBuilder<Microsoft.EntityFrameworkCore.ModelBuilder>);
             List<Type> list = (from p in AppDomain.CurrentDomain.GetAssemblies().SelectMany((Assembly s) => s.GetTypes())
-                               where typeof(IEntityModelBuilder).IsAssignableFrom(p) && p.IsClass && !p.IsAbstract
+                               where typeof(IEntityModelBuilder<Microsoft.EntityFrameworkCore.ModelBuilder>).IsAssignableFrom(p) && p.IsClass && !p.IsAbstract
                                select p).ToList();
             list.ForEach(delegate (Type entityBuilder)
             {
-                IEntityModelBuilder? entityModelBuilder = Activator.CreateInstance(type: entityBuilder) as IEntityModelBuilder;
+                IEntityModelBuilder<Microsoft.EntityFrameworkCore.ModelBuilder>? entityModelBuilder = Activator.CreateInstance(type: entityBuilder) as IEntityModelBuilder<Microsoft.EntityFrameworkCore.ModelBuilder>;
                 if(entityBuilder != null)
                 {
                     entityModelBuilder?.CreateGlobalParameters(modelBuilder);

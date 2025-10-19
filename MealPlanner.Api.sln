@@ -13,12 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MealPlanner.Data", "MealPla
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MealPlanner.Domain.Entities", "MealPlanner.Domain.Entities\MealPlanner.Domain.Entities.csproj", "{CA71EA1E-0321-4799-AA8F-4D0B7DF5A915}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B50D9A22-52C3-489F-AC23-6E5C1229E2F6}"
-	ProjectSection(SolutionItems) = preProject
-		Scripts\16022022_CreateTables.sql = Scripts\16022022_CreateTables.sql
-		Scripts\28022022_CreateTablesAuth.sql = Scripts\28022022_CreateTablesAuth.sql
-	EndProjectSection
-EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{D8A28A1B-D190-49C2-9AB3-895431FF5A3F}"
 EndProject
 Global

@@ -8,6 +8,7 @@
         public const int MAXLENGTH = 5000;
         public const int MAXLENGTH_NAME = 100;
         public const int MAXLENGTH_FRACTIONARY = 5;
+        public const int MAXLENGTH_LONGDESCRIPTION = 500;
 
 
         public const string TYPE_DATETIME = "DATETIME";

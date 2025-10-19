@@ -1,5 +1,4 @@
 ﻿using JGL.Globals.Api.Controllers;
-using JGL.Infra.Globals.API.Responses;
 using JGL.Recipes.Contracts.Models.Recipes;
 using JGL.Recipes.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -14,17 +13,11 @@ namespace JGL.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class RecipeSearchController : BaseController
+    public class RecipeSearchController(
+        ILogger<RecipeSearchController> logger,
+        IRecipeSearchService recipeSearchService) 
+        : BaseController
     {
-        private readonly ILogger<RecipeSearchController> _logger;
-        private readonly IRecipeSearchService _recipeSearchService;
-
-        public RecipeSearchController(ILogger<RecipeSearchController> logger, 
-            IRecipeSearchService recipeSearchService)
-        {
-            _logger = logger;
-            _recipeSearchService = recipeSearchService;
-        }
         /// <summary>
         /// Search recipes by query params
         /// </summary>
@@ -37,7 +30,7 @@ namespace JGL.Api.Controllers
         [ProducesResponseType(typeof(JGLModelResponse<IEnumerable<Recipe>>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Search([FromQuery]RecipeSearch recipeSearch)
         {
-            var recipes = await _recipeSearchService.SearchAsync(recipeSearch);
+            var recipes = await recipeSearchService.SearchAsync(recipeSearch);
 
             var response = new JGLModelResponse<IEnumerable<Recipe>>()
             {

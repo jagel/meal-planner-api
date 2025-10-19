@@ -1,0 +1,30 @@
+{
+  "domain": "Database",
+  "database": {
+    "connectionString": null,
+    "engine": "MSSQL",
+    "schema": null
+  },
+  "predeploy": {
+    "order": [
+      "AlwaysRun"
+    ],
+    "folderName": "BeforeDeploy"
+  },
+  "postdeploy": {
+    "order": [
+      "Views",
+      "Functions",
+      "StoreProcedures"
+    ],
+    "folderName": "PostDeploy"
+  },
+  "migrationFolder": "Migrations",
+  "migrations": [
+    {
+      "version": "1.0.0",
+      "hasNestedFolders": false,
+      "folderName": "Release_1_0_0"
+    }
+  ]
+}

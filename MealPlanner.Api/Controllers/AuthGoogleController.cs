@@ -1,9 +1,7 @@
-﻿using JGL.Globals.Api.Controllers;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using JGL.Security.Auth.Data.Requests;
 using JGL.Security.Auth.Domain.Interfaces;
 using Microsoft.AspNetCore.Authentication.Google;
 using System.Security.Claims;
@@ -16,24 +14,18 @@ namespace JGL.Api.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthGoogleController : AuthBaseController
+    public class AuthGoogleController(
+        ILogger<AuthController> logger,
+        IAuthService authService
+        ) : AuthBaseController
     {
-        private readonly ILogger<AuthController> _logger;
-        private readonly IAuthService _authService;
-
-        public AuthGoogleController(ILogger<AuthController> logger,
-            IAuthService authService)
-        {
-            _logger = logger;
-            _authService = authService;
-        }
-
+        
         /// <summary>
         /// Login user google authentication, don't use swagger, requesst by route
         /// </summary>
         /// <param name="returnUrl">Front end Url</param>
         /// <returns>Authentication modal</returns>
-        [HttpGet("signin-google", Name = "[controller].LoginWithGoogle")]
+        [HttpGet("signin-google", Name = "[controller].Login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl)
         {
@@ -61,7 +53,7 @@ namespace JGL.Api.Controllers
             var externalClaims = result.Principal.Claims.ToList();
             var email = externalClaims.Where(x => x.Type == ClaimTypes.Email).Select(x => x.Value).FirstOrDefault();
 
-            var authResponse = await _authService.LoginByEmailAsync(email);
+            var authResponse = await authService.LoginByEmailAsync(email);
             var authenticated = await GenerateValidCredentialsAsync(authResponse);
 
             var url = "";

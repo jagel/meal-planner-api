@@ -24,7 +24,7 @@ namespace JGL.Recipes.Contracts.Models.Recipes
         /// Meatballs
         /// </example>
         [Required(ErrorMessage = MessagesValidation.ErrorRequiredMessage)]
-        [MaxLength(DefinitionsValues.MAXLENGTH_DESCRIPTION, ErrorMessage = MessagesValidation.ErrorMaxLengthMessage)]
+        [MaxLength(DefinitionsValues.MAXLENGTH_LONGDESCRIPTION, ErrorMessage = MessagesValidation.ErrorMaxLengthMessage)]
         public string Description { get; set; }
     }
 }

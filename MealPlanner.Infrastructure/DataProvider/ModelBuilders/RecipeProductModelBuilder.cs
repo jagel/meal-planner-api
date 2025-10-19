@@ -14,7 +14,7 @@ namespace JGL.Recipes.Infrastructure.DataProvider.ModelBuilders
                    .IsRequired()
                    .HasMaxLength(DatabaseProperties.MySQL.MAXLENGTH_NAME);
 
-                recipeProduct.Property(x => x.Amount)
+                recipeProduct.Property(x => x.Quantity)
                   .IsRequired();
 
                 recipeProduct.Property(x => x.Fractionary)
