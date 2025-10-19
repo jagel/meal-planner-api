@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 var builder = WebApplication.CreateBuilder(args);
 
 //Database configuration
-//builder.Host
 builder.Services.AddMySQLDatabase(builder.Configuration);
 
 //CORS

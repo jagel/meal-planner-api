@@ -25,7 +25,7 @@ namespace JGL.Recipes.Domain.Extensions
                     Order = (index + 1)
                 });
 
-            return stepsList;
+            return [..stepsList];
         }
     }
 }

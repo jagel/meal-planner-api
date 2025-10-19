@@ -25,7 +25,7 @@ namespace JGL.Agenda.Contracts.Models.Agendas
         public string CreatedBy { get; set; }
 
         /// <summary>
-        /// Created By
+        /// Created Date
         /// </summary>
         /// <example>
         /// 01-01-2022

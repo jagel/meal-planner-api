@@ -65,15 +65,15 @@ namespace JGL.Security.Auth.Domain.Services
             return userSessionResponse;
         }
 
-        public async Task<UserResponse> UpdateUserAsync(CreateUserRequest udpaeUser)
+        public async Task<UserResponse> UpdateUserAsync(CreateUserRequest updateUser)
         {
             var updateUserDb = new User
             {
-                Email = udpaeUser.Email,
-                Username = udpaeUser.Username,
-                Name = udpaeUser.Name,
-                Lastname = udpaeUser.Lastname,
-                Language = udpaeUser.Language
+                Email = updateUser.Email,
+                Username = updateUser.Username,
+                Name = updateUser.Name,
+                Lastname = updateUser.Lastname,
+                Language = updateUser.Language
             };
 
             var response = await _userRepository.UpdateUserAsync(updateUserDb);

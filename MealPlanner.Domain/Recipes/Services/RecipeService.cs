@@ -14,7 +14,7 @@ namespace JGL.Recipes.Domain.Services
 
         public RecipeService(
             IRecipeRepository recipeRepository,
-            IRecipeValidation recipeValidation, 
+            IRecipeValidation recipeValidation,
             IRecipeProductRepository recipeProductRepository)
         {
             _recipeRepository = recipeRepository;
@@ -30,38 +30,21 @@ namespace JGL.Recipes.Domain.Services
                 Name = recipeCreate.Name,
                 Description = recipeCreate.Description,
                 Steps = recipeCreate.Steps.StepsToString(),
-                RecipeProducts = recipeCreate.RecipeProducts.Select(rp => new RecipesEntities.RecipeProduct
-                {
-                    Name = rp.Name,
-                    Fractionary = rp.Fractionary,
-                    MeasureType = rp.MeasureType,
-                    Quantity = rp.Quantity
-                })
+                RecipeProducts = [..
+                    recipeCreate.RecipeProducts.Select(rp => new RecipesEntities.RecipeProduct
+                    {
+                        Name = rp.Name,
+                        Fractionary = rp.Fractionary,
+                        MeasureType = rp.MeasureType,
+                        Quantity = rp.Quantity
+                    })
+                ]
             };
-            
+
             var recipeCreated = await _recipeRepository.CreateAsync(createRecipeEntity);
 
+            var recipeResponse = RecipeResponse(recipeCreated);
 
-            var recipeResponse = new Recipe
-            {
-                CreatedBy = recipeCreated.CreatedBy,
-                CreatedDate = recipeCreated.CreatedDate,
-                Description = recipeCreated.Description,
-                Name = recipeCreated.Name,
-                RecipeId = recipeCreated.Id,
-                RecipeProducts = recipeCreated.RecipeProducts.Select(rp => new RecipeProduct
-                {
-                    RecipeProductId = rp.Id,
-                    Name = rp.Name,
-                    Fractionary = rp.Fractionary,
-                    MeasureType = rp.MeasureType,
-                    Quantity = rp.Quantity
-                }),
-                Steps = recipeCreated.Steps.StepsToList(),
-                UpdatedBy = recipeCreated.UpdatedBy,
-                UpdatedDate = recipeCreated.UpdatedDate
-            };
-            
             return recipeResponse;
         }
 
@@ -81,30 +64,12 @@ namespace JGL.Recipes.Domain.Services
             {
                 IncludeProducts = recipeFilters.IncludeProducts
             };
-            
+
             var recipe = await _recipeRepository.GetByIdAsync(recipeId, filters);
 
             _recipeValidation.RecipeNotNullValidation(recipe);
 
-            var recipeResponse = new Recipe
-            {
-                CreatedBy = recipe.CreatedBy,
-                CreatedDate = recipe.CreatedDate,
-                Description = recipe.Description,
-                Name = recipe.Name,
-                RecipeId = recipe.Id,
-                RecipeProducts = recipe.RecipeProducts.Select(rp => new RecipeProduct
-                {
-                    RecipeProductId = rp.Id,
-                    Name = rp.Name,
-                    Fractionary = rp.Fractionary,
-                    MeasureType = rp.MeasureType,
-                    Quantity = rp.Quantity
-                }),
-                Steps = recipe.Steps.StepsToList(),
-                UpdatedBy = recipe.UpdatedBy,
-                UpdatedDate = recipe.UpdatedDate
-            };
+            var recipeResponse = RecipeResponse(recipe);
 
             return recipeResponse;
         }
@@ -117,13 +82,13 @@ namespace JGL.Recipes.Domain.Services
                 Name = recipeUpdate.Name,
                 Description = recipeUpdate.Description,
                 Steps = recipeUpdate.Steps.StepsToString(),
-                RecipeProducts = recipeUpdate.RecipeProducts.Select(rp => new RecipesEntities.RecipeProduct
+                RecipeProducts = [.. recipeUpdate.RecipeProducts.Select(rp => new RecipesEntities.RecipeProduct
                 {
                     Name = rp.Name,
                     Fractionary = rp.Fractionary,
                     MeasureType = rp.MeasureType,
                     Quantity = rp.Quantity
-                }),
+                })],
             };
 
 
@@ -131,28 +96,34 @@ namespace JGL.Recipes.Domain.Services
 
             var recipeCreated = await _recipeRepository.UpdateAsync(updateRecipeEntity);
 
-            var recipeResponse = new Recipe
-            {
-                CreatedBy = recipeCreated.CreatedBy,
-                CreatedDate = recipeCreated.CreatedDate,
-                Description = recipeCreated.Description,
-                Name = recipeCreated.Name,
-                RecipeId = recipeCreated.Id,
-                RecipeProducts = recipeCreated.RecipeProducts.Select(rp => new RecipeProduct
-                {
-                    RecipeProductId = rp.Id,
-                    Name = rp.Name,
-                    Fractionary = rp.Fractionary,
-                    MeasureType = rp.MeasureType,
-                    Quantity = rp.Quantity
-                }),
-                Steps = recipeCreated.Steps.StepsToList(),
-                UpdatedBy = recipeCreated.UpdatedBy,
-                UpdatedDate = recipeCreated.UpdatedDate
-            };
+            var recipeResponse = RecipeResponse(recipeCreated);
 
             return recipeResponse;
         }
 
+        private static Recipe RecipeResponse(RecipesEntities.Recipe recipe) => new()
+        {
+            RecipeId = recipe.Id,
+            Name = recipe.Name,
+            Description = recipe.Description,
+            RecipeProducts = recipe.RecipeProducts.Select(RecipeProductResponse),
+            Steps = recipe.Steps.StepsToList(),
+            CreatedBy = recipe.CreatedBy,
+            CreatedDate = recipe.CreatedDate,
+            UpdatedBy = recipe.UpdatedBy,
+            UpdatedDate = recipe.UpdatedDate
+        };
+
+        private static RecipeProduct RecipeProductResponse(RecipesEntities.RecipeProduct rp) => new()
+        {
+            RecipeProductId = rp.Id,
+            Name = rp.Name,
+            Fractionary = rp.Fractionary,
+            MeasureType = rp.MeasureType,
+            Quantity = rp.Quantity
+        };
+
+       
     }
+
 }
