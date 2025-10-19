@@ -25,7 +25,7 @@ namespace JGL.Api.Controllers
         /// </summary>
         /// <param name="returnUrl">Front end Url</param>
         /// <returns>Authentication modal</returns>
-        [HttpGet("login", Name = "[controller].Login")]
+        [HttpGet("signin-google", Name = "[controller].Login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl)
         {
