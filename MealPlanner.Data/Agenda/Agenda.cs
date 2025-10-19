@@ -33,7 +33,7 @@ namespace JGL.Agenda.Contracts.Models.Agendas
 
 
         /// <summary>
-        /// Created By
+        /// Updated By
         /// </summary>
         /// <example>
         /// mail@test.com
