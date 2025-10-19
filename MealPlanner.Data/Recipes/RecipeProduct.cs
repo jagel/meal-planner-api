@@ -50,7 +50,7 @@ namespace JGL.Recipes.Contracts.Models.Recipes
         /// <example>
         /// Cups
         /// </example>
-        [MaxLength(DefinitionsValues.MAXLENGTH_NAME, ErrorMessage = MessagesValidation.ErrorMaxLengthMessage)]
+        [MaxLength(DefinitionsValues.MAXLENGTH_FRACTIONARY, ErrorMessage = MessagesValidation.ErrorMaxLengthMessage)]
         public string MeasureType { get; set; }
     }
 }
