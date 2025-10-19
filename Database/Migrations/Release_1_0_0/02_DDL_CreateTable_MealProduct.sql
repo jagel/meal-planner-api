@@ -9,7 +9,7 @@
 CREATE TABLE RecipeProduct (
     [RecipeProductId]         INT           IDENTITY (1, 1) NOT NULL,
     [Name]                    VARCHAR(100)  NOT NULL,
-    [Quantity]                INT           NULL,
+    [Quantity]                INT           NOT NULL,
     [Fractionary]             VARCHAR(5)    NULL,
     [MeasureType]             VARCHAR(100)  NOT NULL,
     [RecipeId]                INT           NOT NULL,
