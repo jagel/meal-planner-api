@@ -1,6 +1,5 @@
 ﻿using JGL.Infra.Globals.Data.Definitions;
 using JGL.Agenda.Contracts.CustomValidation;
-using JGL.Agenda.Contracts.Models.CustomDays;
 
 namespace JGL.Agenda.Contracts.Models.Agendas
 {
@@ -13,7 +12,7 @@ namespace JGL.Agenda.Contracts.Models.Agendas
 
         public string[] DisabledDays { get; set; }
 
-        public IEnumerable<CustomDay> CustomDays { get; set; }
+        
         public int MyProperty { get; set; }
 
         /// <summary>
